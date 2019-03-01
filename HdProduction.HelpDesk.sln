@@ -1,0 +1,93 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HdProduction.HelpDesk.Api", "HdProduction.HelpDesk.Api\HdProduction.HelpDesk.Api.csproj", "{440152A4-EE3C-4C58-8BFC-F6913BA1A0B6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppBuilds", "AppBuilds", "{21FA1A7C-2E9A-4403-A4C6-242909A7072A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HdProduction.HelpDesk.Infrastructure", "HdProduction.HelpDesk.Infrastructure\HdProduction.HelpDesk.Infrastructure.csproj", "{93199763-1560-4141-B3C7-86E119C8AE07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HdProduction.HelpDesk.Domain", "HdProduction.HelpDesk.Domain\HdProduction.HelpDesk.Domain.csproj", "{ED3C3A65-1A87-4EDC-934E-E80BC1FBEE07}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{579A7930-6F70-41EB-BA8E-41F13C50C71C}"
+ProjectSection(SolutionItems) = preProject
+	migrate.bat = migrate.bat
+EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HdProduction.Infrastructure.MySql", "HdProduction.Infrastructure.MySql\HdProduction.Infrastructure.MySql.csproj", "{FD7D8172-F4EF-475F-828A-1A4B9437BA12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HdProduction.Infrastructure.PostgresSql", "HdProduction.Infrastructure.PostgresSql\HdProduction.Infrastructure.PostgresSql.csproj", "{E9FB8099-B0A8-4F0E-AA97-2582D322A11D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HdProduction.Infrastructure.SqlServer", "HdProduction.Infrastructure.SqlServer\HdProduction.Infrastructure.SqlServer.csproj", "{55AFFB70-DDB6-4273-96EB-EB16F175D83C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HdProduction.Infrastructure.Sqlite", "HdProduction.Infrastructure.Sqlite\HdProduction.Infrastructure.Sqlite.csproj", "{91C2C110-6430-4A15-991B-081062D13212}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpDesk.App.MySql", "HelpDesk.App.MySql\HelpDesk.App.MySql.csproj", "{911AB164-8B35-4E7E-83EB-FEE1DC9E385D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpDesk.App.PostgresSql", "HelpDesk.App.PostgresSql\HelpDesk.App.PostgresSql.csproj", "{26EF4F1D-C33C-4BC3-B825-0F3AE2C2A59C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpDesk.App.SqlServer", "HelpDesk.App.SqlServer\HelpDesk.App.SqlServer.csproj", "{49C2DFBE-97B8-4E5D-9289-5835EA035DF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpDesk.App.Sqlite", "HelpDesk.App.Sqlite\HelpDesk.App.Sqlite.csproj", "{7EC1DAA7-CFCE-440D-BC63-08EBA5D8629A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{440152A4-EE3C-4C58-8BFC-F6913BA1A0B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{440152A4-EE3C-4C58-8BFC-F6913BA1A0B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{440152A4-EE3C-4C58-8BFC-F6913BA1A0B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{440152A4-EE3C-4C58-8BFC-F6913BA1A0B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93199763-1560-4141-B3C7-86E119C8AE07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93199763-1560-4141-B3C7-86E119C8AE07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93199763-1560-4141-B3C7-86E119C8AE07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93199763-1560-4141-B3C7-86E119C8AE07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED3C3A65-1A87-4EDC-934E-E80BC1FBEE07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED3C3A65-1A87-4EDC-934E-E80BC1FBEE07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED3C3A65-1A87-4EDC-934E-E80BC1FBEE07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED3C3A65-1A87-4EDC-934E-E80BC1FBEE07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD7D8172-F4EF-475F-828A-1A4B9437BA12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD7D8172-F4EF-475F-828A-1A4B9437BA12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD7D8172-F4EF-475F-828A-1A4B9437BA12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD7D8172-F4EF-475F-828A-1A4B9437BA12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9FB8099-B0A8-4F0E-AA97-2582D322A11D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9FB8099-B0A8-4F0E-AA97-2582D322A11D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9FB8099-B0A8-4F0E-AA97-2582D322A11D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9FB8099-B0A8-4F0E-AA97-2582D322A11D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55AFFB70-DDB6-4273-96EB-EB16F175D83C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55AFFB70-DDB6-4273-96EB-EB16F175D83C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55AFFB70-DDB6-4273-96EB-EB16F175D83C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55AFFB70-DDB6-4273-96EB-EB16F175D83C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91C2C110-6430-4A15-991B-081062D13212}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91C2C110-6430-4A15-991B-081062D13212}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91C2C110-6430-4A15-991B-081062D13212}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91C2C110-6430-4A15-991B-081062D13212}.Release|Any CPU.Build.0 = Release|Any CPU
+		{911AB164-8B35-4E7E-83EB-FEE1DC9E385D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{911AB164-8B35-4E7E-83EB-FEE1DC9E385D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{911AB164-8B35-4E7E-83EB-FEE1DC9E385D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{911AB164-8B35-4E7E-83EB-FEE1DC9E385D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26EF4F1D-C33C-4BC3-B825-0F3AE2C2A59C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26EF4F1D-C33C-4BC3-B825-0F3AE2C2A59C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26EF4F1D-C33C-4BC3-B825-0F3AE2C2A59C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26EF4F1D-C33C-4BC3-B825-0F3AE2C2A59C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49C2DFBE-97B8-4E5D-9289-5835EA035DF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49C2DFBE-97B8-4E5D-9289-5835EA035DF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49C2DFBE-97B8-4E5D-9289-5835EA035DF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49C2DFBE-97B8-4E5D-9289-5835EA035DF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EC1DAA7-CFCE-440D-BC63-08EBA5D8629A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EC1DAA7-CFCE-440D-BC63-08EBA5D8629A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EC1DAA7-CFCE-440D-BC63-08EBA5D8629A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EC1DAA7-CFCE-440D-BC63-08EBA5D8629A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FD7D8172-F4EF-475F-828A-1A4B9437BA12} = {579A7930-6F70-41EB-BA8E-41F13C50C71C}
+		{E9FB8099-B0A8-4F0E-AA97-2582D322A11D} = {579A7930-6F70-41EB-BA8E-41F13C50C71C}
+		{55AFFB70-DDB6-4273-96EB-EB16F175D83C} = {579A7930-6F70-41EB-BA8E-41F13C50C71C}
+		{91C2C110-6430-4A15-991B-081062D13212} = {579A7930-6F70-41EB-BA8E-41F13C50C71C}
+		{911AB164-8B35-4E7E-83EB-FEE1DC9E385D} = {21FA1A7C-2E9A-4403-A4C6-242909A7072A}
+		{26EF4F1D-C33C-4BC3-B825-0F3AE2C2A59C} = {21FA1A7C-2E9A-4403-A4C6-242909A7072A}
+		{49C2DFBE-97B8-4E5D-9289-5835EA035DF3} = {21FA1A7C-2E9A-4403-A4C6-242909A7072A}
+		{7EC1DAA7-CFCE-440D-BC63-08EBA5D8629A} = {21FA1A7C-2E9A-4403-A4C6-242909A7072A}
+	EndGlobalSection
+EndGlobal

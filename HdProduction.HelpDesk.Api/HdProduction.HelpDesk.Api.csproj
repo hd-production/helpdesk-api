@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="6.2.2" />
+        <PackageReference Include="HdProduction.App.Common" Version="0.1.4" />
+        <PackageReference Include="log4net" Version="2.0.8" />
+        <PackageReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Properties\launchSettings.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\HdProduction.HelpDesk.Domain\HdProduction.HelpDesk.Domain.csproj" />
+      <ProjectReference Include="..\HdProduction.HelpDesk.Infrastructure\HdProduction.HelpDesk.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>
