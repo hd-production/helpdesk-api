@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using HdProduction.App.Common;
+using HdProduction.App.Common.Auth;
 using HdProduction.HelpDesk.Domain.Contract;
 using HdProduction.HelpDesk.Infrastructure;
 using HdProduction.HelpDesk.Infrastructure.Repositories;
@@ -36,9 +38,13 @@ namespace HdProduction.HelpDesk.Api.Configuration
                 .AddControllers()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddApiVersioning();
+
             services.AddScoped<ITicketsRepository, TicketsRepository>();
 
             services.AddSingleton(AutoMapperConfig.Configure());
+
+            services.AddJwtAuthentication(Configuration.GetValue<string>("RsaKeysPath:Public"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,13 +72,20 @@ namespace HdProduction.HelpDesk.Api.Configuration
         {
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                var context = serviceScope.ServiceProvider.GetService<ApplicationContext>();
-                var migrationsAssembly = context.GetService<IMigrationsAssembly>();
-                var appliedMigrations = await context.Database.GetAppliedMigrationsAsync();
-
-                if (migrationsAssembly.Migrations.Any(m => !appliedMigrations.Contains(m.Key)))
+                try
                 {
-                    await context.Database.MigrateAsync();
+                    var context = serviceScope.ServiceProvider.GetService<ApplicationContext>();
+                    var migrationsAssembly = context.GetService<IMigrationsAssembly>();
+                    var appliedMigrations = await context.Database.GetAppliedMigrationsAsync();
+
+                    if (migrationsAssembly.Migrations.Any(m => !appliedMigrations.Contains(m.Key)))
+                    {
+                        await context.Database.MigrateAsync();
+                    }
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine();
                 }
             }
         }

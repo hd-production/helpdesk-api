@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HdProduction.HelpDesk.Api.Controllers
 {
     [Route("")]
-    [ApiController]
+    [ApiController, ApiVersionNeutral]
     public class HomeController : ControllerBase
     {
         [HttpGet("")]

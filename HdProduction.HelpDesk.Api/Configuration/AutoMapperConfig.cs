@@ -1,5 +1,5 @@
 using AutoMapper;
-using HdProduction.HelpDesk.Api.Models;
+using HdProduction.HelpDesk.Api.Models.Tickets;
 using HdProduction.HelpDesk.Domain.Entities;
 
 namespace HdProduction.HelpDesk.Api.Configuration
@@ -21,7 +21,7 @@ namespace HdProduction.HelpDesk.Api.Configuration
 
     private static void CreateMapping(IProfileExpression cfg)
     {
-      cfg.CreateMap<Ticket, TicketResponseModel>();
+      cfg.CreateMap<Ticket, TicketAdminResponseModel>();
     }
   }
 }

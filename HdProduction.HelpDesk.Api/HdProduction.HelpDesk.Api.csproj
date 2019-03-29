@@ -7,9 +7,10 @@
 
     <ItemGroup>
         <PackageReference Include="AutoMapper" Version="6.2.2" />
-        <PackageReference Include="HdProduction.App.Common" Version="0.1.4" />
+        <PackageReference Include="HdProduction.App.Common" Version="0.2.0" />
         <PackageReference Include="log4net" Version="2.0.8" />
         <PackageReference Include="Microsoft.AspNetCore.App" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="3.1.2" />
     </ItemGroup>
 
     <ItemGroup>
@@ -19,6 +20,13 @@
     <ItemGroup>
       <ProjectReference Include="..\HdProduction.HelpDesk.Domain\HdProduction.HelpDesk.Domain.csproj" />
       <ProjectReference Include="..\HdProduction.HelpDesk.Infrastructure\HdProduction.HelpDesk.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="log.config" />
+      <Content Include="log.config">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

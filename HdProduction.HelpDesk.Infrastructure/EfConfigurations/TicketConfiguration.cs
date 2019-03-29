@@ -10,6 +10,13 @@ namespace HdProduction.HelpDesk.Infrastructure.EfConfigurations
     {
       builder.ToTable("tickets");
 
+      builder.Property(t => t.Issue)
+        .IsRequired()
+        .HasMaxLength(256);
+
+      builder.Property(t => t.Details)
+        .IsRequired();
+
       base.ConfigureNext(builder);
     }
   }
