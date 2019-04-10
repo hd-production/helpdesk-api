@@ -29,5 +29,8 @@ namespace HdProduction.HelpDesk.Domain.Entities
     public int? OldStatusId { get; }
     public int? NewStatusId { get; }
     public long? CommentId { get; }
+
+    public Ticket Ticket { get; set; } // ef
+    public User User { get; set; } // ef
   }
 }

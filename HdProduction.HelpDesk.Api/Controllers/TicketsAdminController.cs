@@ -27,20 +27,20 @@ namespace HdProduction.HelpDesk.Api.Controllers
     {
       return _mapper.Map<List<TicketAdminResponseModel>>(await _ticketsRepository.GetAllAsync());
     }
-    
+
     [HttpGet("{id}")]
     public async Task<TicketAdminResponseModel> Get(long id)
     {
       return _mapper.Map<TicketAdminResponseModel>(await _ticketsRepository.FindForAdminAsync(id));
     }
-    
+
     [HttpPut("{id}")]
     public async Task<TicketAdminResponseModel> Update(long id, TicketRequestModel requestModel)
     {
       await _ticketService.UpdateAsync(id);
       return await Get(id);
     }
-    
+
     [HttpPut("{id}/comment")]
     public async Task<TicketAdminResponseModel> AddComment(long id, TicketRequestModel requestModel)
     {

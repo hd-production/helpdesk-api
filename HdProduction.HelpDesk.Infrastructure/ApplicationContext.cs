@@ -13,12 +13,17 @@ namespace HdProduction.HelpDesk.Infrastructure
 
     public DbSet<Ticket> Tickets { get; set; }
     public DbSet<Comment> Comments { get; set; }
-    public DbSet<Attachment> Attachments { get; set; }
+    public DbSet<TicketAttachment> Attachments { get; set; }
     public DbSet<TicketAction> Actions { get; set; }
+    public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       modelBuilder.ApplyConfiguration(new TicketConfiguration());
+      modelBuilder.ApplyConfiguration(new CommentConfiguration());
+      modelBuilder.ApplyConfiguration(new TicketAttachmentConfiguration());
+      modelBuilder.ApplyConfiguration(new TicketActionConfiguration());
+      modelBuilder.ApplyConfiguration(new UserConfiguration());
 
       base.OnModelCreating(modelBuilder);
     }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace HdProduction.HelpDesk.Domain.Entities
 {
   public class User : EntityBase<long>
@@ -18,5 +20,9 @@ namespace HdProduction.HelpDesk.Domain.Entities
     public string PermissionsRaw { get; }
     public string PwdHash { get; }
     public string PwdSalt { get; }
+    public string RefreshToken { get; private set; }
+    
+    public ICollection<Comment> Comments { get; } // ef
+    public ICollection<TicketAction> Actions { get; } // ef
   }
 }

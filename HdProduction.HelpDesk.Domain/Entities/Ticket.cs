@@ -15,8 +15,8 @@ namespace HdProduction.HelpDesk.Domain.Entities
     public string Details { get; }
     public long? AssigneeId { get; }
 
-    public ICollection<Comment> Comments { get; }
-    public ICollection<TicketAction> Actions { get; }
-    public ICollection<TicketAttachment> Attachment { get; }
+    public ICollection<Comment> Comments { get; } // ef
+    public ICollection<TicketAction> Actions { get; } // ef
+    public ICollection<TicketAttachment> Attachments { get; } // ef
   }
 }

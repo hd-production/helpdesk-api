@@ -12,5 +12,8 @@ namespace HdProduction.HelpDesk.Domain.Entities
     public long TicketId { get; }
     public string Text { get; }
     public long UserId { get; }
+    
+    public Ticket Ticket { get; set; } // ef
+    public User User { get; set; } // ef
   }
 }

@@ -38,7 +38,7 @@ namespace HdProduction.HelpDesk.Api.Configuration
                 .AddControllers()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddApiVersioning();
+//            services.AddApiVersioning();
 
             services.AddScoped<ITicketsRepository, TicketsRepository>();
 
@@ -63,7 +63,7 @@ namespace HdProduction.HelpDesk.Api.Configuration
             Task.Run(() => ConfigureDbAsync(app));
             app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseCors(Configuration);
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc();
 
             Logger.Info("Application is started");
         }
@@ -76,8 +76,10 @@ namespace HdProduction.HelpDesk.Api.Configuration
                 {
                     var context = serviceScope.ServiceProvider.GetService<ApplicationContext>();
                     var migrationsAssembly = context.GetService<IMigrationsAssembly>();
-                    var appliedMigrations = await context.Database.GetAppliedMigrationsAsync();
 
+                    await context.Database.EnsureCreatedAsync();
+
+                    var appliedMigrations = await context.Database.GetAppliedMigrationsAsync();
                     if (migrationsAssembly.Migrations.Any(m => !appliedMigrations.Contains(m.Key)))
                     {
                         await context.Database.MigrateAsync();

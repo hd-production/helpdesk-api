@@ -26,10 +26,11 @@ namespace HdProduction.HelpDesk.Infrastructure.Repositories
 
     public async Task<Ticket> FindForAdminAsync(long id)
     {
-      var entity = await _context.Tickets.FindAsync(id);
-      await _context.Entry(entity).Collection(e => e.Attachment).LoadAsync();
-      await _context.Entry(entity).Collection(e => e.Comments).LoadAsync();
-      await _context.Entry(entity).Collection(e => e.Actions).LoadAsync();
+      var entity = await _context.Tickets
+        .Include(e => e.Attachments)
+        .Include(e => e.Comments)
+        .Include(e => e.Actions)
+        .FirstOrDefaultAsync(e => e.Id == id);
 
       return entity;
     }

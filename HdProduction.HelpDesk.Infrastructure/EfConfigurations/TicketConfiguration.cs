@@ -8,14 +8,14 @@ namespace HdProduction.HelpDesk.Infrastructure.EfConfigurations
   {
     protected override void ConfigureNext(EntityTypeBuilder<Ticket> builder)
     {
-      builder.ToTable("tickets");
-
       builder.Property(t => t.Issue)
         .IsRequired()
         .HasMaxLength(256);
 
       builder.Property(t => t.Details)
         .IsRequired();
+
+      builder.Property(t => t.AssigneeId);
 
       base.ConfigureNext(builder);
     }
