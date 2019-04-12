@@ -22,6 +22,7 @@ namespace HdProduction.HelpDesk.Api.Configuration
     private static void CreateMapping(IProfileExpression cfg)
     {
       cfg.CreateMap<Ticket, TicketAdminResponseModel>();
+      cfg.CreateMap<Ticket, TicketItemResponseModel>();
     }
   }
 }

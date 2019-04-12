@@ -7,6 +7,7 @@ using HdProduction.App.Common.Auth;
 using HdProduction.HelpDesk.Domain.Contract;
 using HdProduction.HelpDesk.Infrastructure;
 using HdProduction.HelpDesk.Infrastructure.Repositories;
+using HdProduction.HelpDesk.Infrastructure.Services;
 using log4net;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,6 +42,7 @@ namespace HdProduction.HelpDesk.Api.Configuration
 //            services.AddApiVersioning();
 
             services.AddScoped<ITicketsRepository, TicketsRepository>();
+            services.AddScoped<ITicketService, TicketService>();
 
             services.AddSingleton(AutoMapperConfig.Configure());
 

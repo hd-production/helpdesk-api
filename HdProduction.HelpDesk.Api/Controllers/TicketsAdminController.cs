@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HdProduction.HelpDesk.Api.Controllers
 {
-  [Route("tickets/admin"), ApiController, ApiVersion("0")]
+  [ApiController, ApiVersion("0")]
+  [Route("tickets/admin")]
   public class TicketsAdminController : ControllerBase
   {
     private readonly IMapper _mapper;
@@ -23,9 +24,9 @@ namespace HdProduction.HelpDesk.Api.Controllers
     }
 
     [HttpGet("")]
-    public async Task<List<TicketAdminResponseModel>> Get()
+    public async Task<List<TicketItemResponseModel>> Get()
     {
-      return _mapper.Map<List<TicketAdminResponseModel>>(await _ticketsRepository.GetAllAsync());
+      return _mapper.Map<List<TicketItemResponseModel>>(await _ticketsRepository.GetAllAsync());
     }
 
     [HttpGet("{id}")]
