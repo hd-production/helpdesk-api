@@ -4,7 +4,9 @@ using System.Reflection;
 using System.Threading.Tasks;
 using HdProduction.App.Common;
 using HdProduction.App.Common.Auth;
+using HdProduction.HelpDesk.Api.Auth;
 using HdProduction.HelpDesk.Domain.Contract;
+using HdProduction.HelpDesk.Domain.Services;
 using HdProduction.HelpDesk.Infrastructure;
 using HdProduction.HelpDesk.Infrastructure.Repositories;
 using HdProduction.HelpDesk.Infrastructure.Services;
@@ -43,6 +45,11 @@ namespace HdProduction.HelpDesk.Api.Configuration
 
             services.AddScoped<ITicketsRepository, TicketsRepository>();
             services.AddScoped<ITicketService, TicketService>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ISessionService, SessionsService>();
+            services.AddScoped<ITokenService, JwtTokenService>(c => new JwtTokenService(Configuration.GetValue<string>("RsaKeysPath:Private")));
+            services.AddScoped<IUserService, UserService>();
 
             services.AddSingleton(AutoMapperConfig.Configure());
 

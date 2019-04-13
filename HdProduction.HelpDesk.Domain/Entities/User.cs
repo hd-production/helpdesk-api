@@ -21,6 +21,11 @@ namespace HdProduction.HelpDesk.Domain.Entities
     public string PwdHash { get; }
     public string PwdSalt { get; }
     public string RefreshToken { get; private set; }
+
+    public void SetRefreshToken(string refreshToken)
+    {
+      RefreshToken = refreshToken;
+    }
     
     public ICollection<Comment> Comments { get; } // ef
     public ICollection<TicketAction> Actions { get; } // ef

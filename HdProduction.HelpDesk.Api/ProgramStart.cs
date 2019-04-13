@@ -17,7 +17,7 @@ namespace HdProduction.HelpDesk.Api
             where TStartup : class =>
             WebHost.CreateDefaultBuilder(args)
                 .UseKestrel()
-                .UseUrls("http://localhost:5001")
+                .UseUrls("http://0.0.0.0:5001")
                 .ConfigureLogging((hostingContext, logging) => logging.AddLog4Net())
                 .UseStartup<TStartup>()
                 .CaptureStartupErrors(true);
