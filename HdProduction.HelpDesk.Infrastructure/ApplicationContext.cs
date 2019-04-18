@@ -12,6 +12,7 @@ namespace HdProduction.HelpDesk.Infrastructure
     }
 
     public DbSet<Ticket> Tickets { get; set; }
+    public DbSet<TicketStatus> TicketStatuses { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<TicketAttachment> Attachments { get; set; }
     public DbSet<TicketAction> Actions { get; set; }
@@ -24,6 +25,7 @@ namespace HdProduction.HelpDesk.Infrastructure
       modelBuilder.ApplyConfiguration(new TicketAttachmentConfiguration());
       modelBuilder.ApplyConfiguration(new TicketActionConfiguration());
       modelBuilder.ApplyConfiguration(new UserConfiguration());
+      modelBuilder.ApplyConfiguration(new TicketStatusConfiguration());
 
       base.OnModelCreating(modelBuilder);
     }
