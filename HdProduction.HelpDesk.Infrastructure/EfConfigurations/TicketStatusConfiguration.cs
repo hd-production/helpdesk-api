@@ -9,7 +9,7 @@ namespace HdProduction.HelpDesk.Infrastructure.EfConfigurations
         {
             builder.Property(t => t.Name)
                 .IsRequired()
-                .HasMaxLength(256);
+                .HasMaxLength(32);
             
             base.ConfigureNext(builder);
         }

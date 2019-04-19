@@ -32,9 +32,9 @@ namespace HdProduction.HelpDesk.Infrastructure.Repositories
             _context.TicketStatuses.Remove(entity);
         }
 
-        public async Task SaveAsync()
+        public Task SaveAsync()
         {
-            await _context.SaveChangesAsync();
+            return _context.SaveChangesAsync();
         }
 
         public Task<List<TicketStatus>> GetAllAsync()

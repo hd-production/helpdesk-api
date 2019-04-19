@@ -45,9 +45,9 @@ namespace HdProduction.HelpDesk.Infrastructure.Repositories
       _context.Tickets.Remove(entity);
     }
 
-    public async Task SaveAsync()
+    public Task SaveAsync()
     {
-      await _context.SaveChangesAsync();
+      return _context.SaveChangesAsync();
     }
 
     public async Task<List<Ticket>> GetAllAsync(bool trackEntities = true)

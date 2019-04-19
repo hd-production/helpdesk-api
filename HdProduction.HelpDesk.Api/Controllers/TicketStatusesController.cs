@@ -53,9 +53,9 @@ namespace HdProduction.HelpDesk.Api.Controllers
         }
         
         [HttpDelete("{id}")]
-        public async Task Delete(long id)
+        public Task Delete(long id)
         {
-            await _ticketStatusService.DeleteAsync(id);
+            return _ticketStatusService.DeleteAsync(id);
         }
     }
 }
