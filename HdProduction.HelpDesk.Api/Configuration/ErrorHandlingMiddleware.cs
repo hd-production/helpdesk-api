@@ -23,12 +23,11 @@ namespace HdProduction.HelpDesk.Api.Configuration
 
       switch (exception)
       {
-        // TODO normal filters
         case EntityNotFoundException _:
           statusCode = HttpStatusCode.NotFound;
           message = exception.Message;
           break;
-        case ApplicationException _:
+        case BusinessLogicException _:
           statusCode = HttpStatusCode.BadRequest;
           message = exception.Message;
           break;
