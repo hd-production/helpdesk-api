@@ -3,6 +3,7 @@ using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using HdProduction.App.Common;
+using HdProduction.HelpDesk.Domain.Exceptions;
 using log4net;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -20,16 +21,20 @@ namespace HdProduction.HelpDesk.Api.Configuration
       string message;
       var statusCode = HttpStatusCode.InternalServerError;
 
-      // TODO normal filters
-      if (exception is ApplicationException)
+      switch (exception)
       {
-        statusCode = HttpStatusCode.BadRequest;
-        message = exception.Message;
-      }
-      else
-      {
-        Logger.Error("Unknown exception", exception);
-        message = "Oops. Something went wrong.";
+        case EntityNotFoundException _:
+          statusCode = HttpStatusCode.NotFound;
+          message = exception.Message;
+          break;
+        case BusinessLogicException _:
+          statusCode = HttpStatusCode.BadRequest;
+          message = exception.Message;
+          break;
+        default:
+          Logger.Error("Unknown exception", exception);
+          message = "Oops. Something went wrong.";
+          break;
       }
 
       var result = JsonConvert.SerializeObject(new {message});

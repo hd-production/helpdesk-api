@@ -44,6 +44,8 @@ namespace HdProduction.HelpDesk.Api.Configuration
 //            services.AddApiVersioning();
 
             services.AddScoped<ITicketsRepository, TicketsRepository>();
+            services.AddScoped<ITicketStatusRepository, TicketStatusRepository>();
+            services.AddScoped<ITicketStatusService, TicketStatusService>();
             services.AddScoped<ITicketService, TicketService>();
 
             services.AddScoped<IUserRepository, UserRepository>();
