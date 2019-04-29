@@ -23,19 +23,20 @@ namespace HdProduction.HelpDesk.Api.Controllers
         [HttpPost("")]
         public async Task<UserResponseModel> Create(UserRequestModel requestModel)
         {
-            var user = await _userService.CreateAsync(
+            var userId = await _userService.CreateAsync(
                 requestModel.FirstName,
                 requestModel.LastName,
                 requestModel.Email,
                 requestModel.PwdHash
             );
+            var user = await _userService.FindAsync(userId);
             return _mapper.Map<User, UserResponseModel>(user);
         }
 
         [HttpGet("{id}")]
         public async Task<UserResponseModel> Find(long id)
         {
-            var user = await _userService.Find(id);
+            var user = await _userService.FindAsync(id);
             return _mapper.Map<User, UserResponseModel>(user);
         }
     }

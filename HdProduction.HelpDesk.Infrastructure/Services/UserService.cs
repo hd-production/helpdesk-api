@@ -15,17 +15,17 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
             _userRepository = userRepository;
         }
 
-        public async Task<User> CreateAsync(string firstName, string lastName, string email, string pwdHash)
+        public async Task<long> CreateAsync(string firstName, string lastName, string email, string pwdHash)
         {
             var pwdHelper = SecurityHelper.Create();
             var user = new User(email, firstName, lastName, "",
                 pwdHelper.CreateSaltedPassword(pwdHash), pwdHelper.Salt);
             _userRepository.Add(user);
             await _userRepository.SaveAsync();
-            return user;
+            return user.Id;
         }
 
-        public async Task<User> Find(long id)
+        public async Task<User> FindAsync(long id)
         {
             return await _userRepository.FindAsync(id) 
                    ?? throw new EntityNotFoundException("User with such id not found.");
