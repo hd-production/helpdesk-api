@@ -7,5 +7,7 @@ namespace HdProduction.HelpDesk.Domain.Contract
   {
     Task<long> CreateAsync(Ticket ticket);
     Task UpdateAsync(long id);
+
+    Task AddCommentAsync(long ticketId, string text, long userId, long? replyToId);
   }
 }

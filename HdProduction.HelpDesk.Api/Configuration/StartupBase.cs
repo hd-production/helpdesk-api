@@ -16,7 +16,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,6 +46,8 @@ namespace HdProduction.HelpDesk.Api.Configuration
             services.AddScoped<ITicketStatusRepository, TicketStatusRepository>();
             services.AddScoped<ITicketStatusService, TicketStatusService>();
             services.AddScoped<ITicketService, TicketService>();
+            services.AddScoped<ITicketActionRepository, TicketActionRepository>();
+            services.AddScoped<ICommentRepository, CommentsRepository>();
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISessionService, SessionsService>();

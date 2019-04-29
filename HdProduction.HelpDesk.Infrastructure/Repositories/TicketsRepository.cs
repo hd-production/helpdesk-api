@@ -8,25 +8,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HdProduction.HelpDesk.Infrastructure.Repositories
 {
-  public class TicketsRepository : ITicketsRepository
+  public class TicketsRepository : RepositoryBase<Ticket, long>, ITicketsRepository
   {
-    private readonly ApplicationContext _context;
-
-    public TicketsRepository(ApplicationContext context)
+    public TicketsRepository(ApplicationContext context) : base(context)
     {
-      _context = context;
     }
-
-    public Task<Ticket> FindAsync(long id, bool withTracking = true)
-    {
-      return withTracking
-        ? _context.Tickets.FindAsync(id)
-        : _context.Tickets.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
-    }
-
+    
     public async Task<Ticket> FindForAdminAsync(long id)
     {
-      var entity = await _context.Tickets
+      var entity = await Context.Tickets
         .Include(e => e.Attachments)
         .Include(e => e.Comments)
         .Include(e => e.Actions)
@@ -34,32 +24,17 @@ namespace HdProduction.HelpDesk.Infrastructure.Repositories
 
       return entity;
     }
-
-    public void Add(Ticket entity)
-    {
-      _context.Tickets.Add(entity);
-    }
-
-    public void Remove(Ticket entity)
-    {
-      _context.Tickets.Remove(entity);
-    }
-
-    public Task SaveAsync()
-    {
-      return _context.SaveChangesAsync();
-    }
-
+    
     public async Task<List<Ticket>> GetAllAsync(bool trackEntities = true)
     {
       return trackEntities
-        ? await _context.Tickets.ToListAsync()
-        : await _context.Tickets.AsNoTracking().ToListAsync();
+        ? await Context.Tickets.ToListAsync()
+        : await Context.Tickets.AsNoTracking().ToListAsync();
     }
 
     public Task<List<TicketItemModel>> GetByUserAsync(long assigneeId)
     {
-      return _context.Tickets
+      return Context.Tickets
         .Where(t => t.AssigneeId == assigneeId)
         .Select(t => new TicketItemModel(t.Id, t.Issue))
         .ToListAsync();

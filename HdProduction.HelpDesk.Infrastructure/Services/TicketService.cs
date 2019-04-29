@@ -8,13 +8,17 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
 {
   public class TicketService : ITicketService
   {
-    private readonly ApplicationContext _dbContext;
+    private readonly ICommentRepository _commentRepository;
     private readonly ITicketsRepository _ticketsRepository;
+    private readonly ITicketActionRepository _ticketActionRepository;
 
-    public TicketService(ITicketsRepository ticketsRepository, ApplicationContext dbContext)
+    public TicketService(ITicketsRepository ticketsRepository,
+      ICommentRepository commentRepository, 
+      ITicketActionRepository ticketActionRepository)
     {
       _ticketsRepository = ticketsRepository;
-      _dbContext = dbContext;
+      _commentRepository = commentRepository;
+      _ticketActionRepository = ticketActionRepository;
     }
 
     public async Task<long> CreateAsync(Ticket ticket)
@@ -30,18 +34,13 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
       
     }
 
-    public async Task AddCommentAsync(Comment comment)
+    public Task AddCommentAsync(long ticketId, string text, long userId, long? replyToId)
     {
-      using (var transaction = await _dbContext.Database.BeginTransactionAsync())
-      {
-        _dbContext.Comments.Add(comment);
-        await _dbContext.SaveChangesAsync();
-
-        _dbContext.Actions.Add(new TicketAction(comment.TicketId, comment.UserId, ActionType.Comment, DateTime.UtcNow, commentId: comment.Id));
-        await _dbContext.SaveChangesAsync();
-
-        transaction.Commit();
-      }
+      var comment = new Comment(ticketId, text, userId, replyToId);
+        _commentRepository.Add(comment);
+        _ticketActionRepository.Add(new TicketAction
+          (comment.TicketId, comment.UserId, ActionType.Comment, DateTime.UtcNow, commentId: comment.Id));
+        return _commentRepository.SaveAsync();
     }
   }
 }

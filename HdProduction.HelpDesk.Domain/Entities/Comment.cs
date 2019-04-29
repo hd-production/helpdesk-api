@@ -1,19 +1,26 @@
+using System.Collections.Generic;
+
 namespace HdProduction.HelpDesk.Domain.Entities
 {
   public class Comment : EntityBase<long>
   {
-    public Comment(long ticketId, string text, long userId)
+    public Comment(long ticketId, string text, long userId, long? replyToComment)
     {
       TicketId = ticketId;
       Text = text;
       UserId = userId;
+      ReplyToComment = replyToComment;
     }
 
     public long TicketId { get; }
     public string Text { get; }
     public long UserId { get; }
+    public long? ReplyToComment { get; }
     
     public Ticket Ticket { get; set; } // ef
     public User User { get; set; } // ef
+
+    public Comment Parent { get; set; } // ef
+    public ICollection<Comment> Replies { get; set; } // ef
   }
 }
