@@ -9,14 +9,19 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IUserSafeguard _safeguard;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IUserSafeguard safeguard)
         {
             _userRepository = userRepository;
+            _safeguard = safeguard;
         }
 
         public async Task<long> CreateAsync(string firstName, string lastName, string email, string pwdHash)
         {
+            await _safeguard.EnsureEmailAsync(email);
+            // TODO _safeguard.EnsureName(lastName, firstName); etc.
+            
             var pwdHelper = SecurityHelper.Create();
             var user = new User(email, firstName, lastName, "",
                 pwdHelper.CreateSaltedPassword(pwdHash), pwdHelper.Salt);
