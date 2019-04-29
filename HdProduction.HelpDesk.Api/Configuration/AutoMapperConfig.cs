@@ -1,6 +1,7 @@
 using AutoMapper;
 using HdProduction.HelpDesk.Api.Models.Tickets;
 using HdProduction.HelpDesk.Api.Models.TicketStatuses;
+using HdProduction.HelpDesk.Api.Models.Users;
 using HdProduction.HelpDesk.Domain.Entities;
 
 namespace HdProduction.HelpDesk.Api.Configuration
@@ -27,6 +28,8 @@ namespace HdProduction.HelpDesk.Api.Configuration
 
       cfg.CreateMap<TicketStatus, TicketStatusResponse>();
       cfg.CreateMap<TicketStatus, TicketStatusRequest>();
+
+      cfg.CreateMap<User, UserResponseModel>();
     }
   }
 }

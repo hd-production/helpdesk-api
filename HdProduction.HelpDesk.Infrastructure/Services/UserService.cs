@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using HdProduction.HelpDesk.Domain.Contract;
 using HdProduction.HelpDesk.Domain.Entities;
+using HdProduction.HelpDesk.Domain.Exceptions;
 using HdProduction.HelpDesk.Domain.Services;
 
 namespace HdProduction.HelpDesk.Infrastructure.Services
@@ -14,12 +15,20 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
             _userRepository = userRepository;
         }
 
-        public Task CreateAsync(string email, string pwdHash)
+        public async Task<User> CreateAsync(string firstName, string lastName, string email, string pwdHash)
         {
             var pwdHelper = SecurityHelper.Create();
-            _userRepository.Add(new User(email, "abc", "cde", "", 
-                pwdHelper.CreateSaltedPassword(pwdHash), pwdHelper.Salt));
-            return _userRepository.SaveAsync();
+            var user = new User(email, firstName, lastName, "",
+                pwdHelper.CreateSaltedPassword(pwdHash), pwdHelper.Salt);
+            _userRepository.Add(user);
+            await _userRepository.SaveAsync();
+            return user;
+        }
+
+        public async Task<User> Find(long id)
+        {
+            return await _userRepository.FindAsync(id) 
+                   ?? throw new EntityNotFoundException("User with such id not found.");
         }
     }
 }
