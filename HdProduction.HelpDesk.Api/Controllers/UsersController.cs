@@ -32,8 +32,7 @@ namespace HdProduction.HelpDesk.Api.Controllers
                 requestModel.Email,
                 requestModel.PwdHash
             );
-            var user = await _userService.FindAsync(userId);
-            return _mapper.Map<User, UserResponseModel>(user);
+            return await Find(userId);
         }
 
         [HttpGet("{id}")]
@@ -49,8 +48,7 @@ namespace HdProduction.HelpDesk.Api.Controllers
         public async Task<UserResponseModel> FindMe()
         {
             long userId = User.GetId();
-            var user = await _userService.FindAsync(userId);
-            return _mapper.Map<User, UserResponseModel>(user);
+            return await Find(userId);
         }
     }
 }
