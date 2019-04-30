@@ -43,8 +43,7 @@ namespace HdProduction.HelpDesk.Api.Controllers
         }
 
         [HttpGet("me")]    
-        [Authorize(AuthenticationSchemes = JwtDefaults.AuthenticationSchemeIgnoreExpiration)]
-
+        [Authorize(AuthenticationSchemes = JwtDefaults.AuthenticationScheme)]
         public async Task<UserResponseModel> FindMe()
         {
             long userId = User.GetId();
