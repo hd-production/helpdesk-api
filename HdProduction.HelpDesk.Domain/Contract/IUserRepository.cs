@@ -5,6 +5,6 @@ namespace HdProduction.HelpDesk.Domain.Contract
 {
   public interface IUserRepository : IRepository<User, long>
   {
-    Task<User> FindByEmail(string email);
+    Task<User> FindByEmailAsync(string email);
   }
 }
