@@ -8,25 +8,25 @@ namespace HdProduction.HelpDesk.Infrastructure.EfConfigurations
   {
     protected override void ConfigureNext(EntityTypeBuilder<TicketAction> builder)
     {
-      builder.Property(b => b.TicketId);
-      builder.Property(b => b.UserId);
-      builder.Property(b => b.Type);
-      builder.Property(b => b.Time);
+      builder.Property(ta => ta.TicketId);
+      builder.Property(ta => ta.UserId);
+      builder.Property(ta => ta.Type);
+      builder.Property(ta => ta.Time);
 
-      builder.Property(b => b.OldAssigneeId);
-      builder.Property(b => b.NewAssigneeId);
-      builder.Property(b => b.OldStatusId);
-      builder.Property(b => b.NewStatusId);
-      builder.Property(b => b.CommentId);
+      builder.Property(ta => ta.OldAssigneeId);
+      builder.Property(ta => ta.NewAssigneeId);
+      builder.Property(ta => ta.OldStatusId);
+      builder.Property(ta => ta.NewStatusId);
+      builder.Property(ta => ta.CommentId);
 
-      builder.HasOne(up => up.User)
+      builder.HasOne(ta => ta.User)
         .WithMany(u => u.Actions)
-        .HasForeignKey(up => up.UserId)
+        .HasForeignKey(ta => ta.UserId)
         .OnDelete(DeleteBehavior.Cascade);
 
-      builder.HasOne(up => up.Ticket)
-        .WithMany(p => p.Actions)
-        .HasForeignKey(up => up.TicketId)
+      builder.HasOne(ta => ta.Ticket)
+        .WithMany(t => t.Actions)
+        .HasForeignKey(ta => ta.TicketId)
         .OnDelete(DeleteBehavior.Cascade);
 
       base.ConfigureNext(builder);

@@ -34,9 +34,9 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
       
     }
 
-    public Task AddCommentAsync(long ticketId, string text, long userId, long? replyToId)
+    public Task AddCommentAsync(long ticketId, string text, long userId, long? replyToCommentId)
     {
-      var comment = new Comment(ticketId, text, userId, replyToId);
+      var comment = new Comment(ticketId, text, userId, replyToCommentId, DateTime.UtcNow);
         _commentRepository.Add(comment);
         _ticketActionRepository.Add(new TicketAction
           (comment.TicketId, comment.UserId, ActionType.Comment, DateTime.UtcNow, commentId: comment.Id));

@@ -44,11 +44,11 @@ namespace HdProduction.HelpDesk.Api.Controllers
       return await Get(id);
     }
 
-    [HttpPut("{id}/comment")]
+    [HttpPost("{id}/comment")]
     public async Task<TicketAdminResponseModel> AddComment(long id, CommentRequestModel requestModel)
     {
       await _ticketService.AddCommentAsync(requestModel.TicketId, requestModel.Text,
-        requestModel.UserId, requestModel.ReplyToComment);
+        requestModel.UserId, requestModel.ReplyToCommentId);
       return await Get(id);
     }
   }

@@ -8,10 +8,10 @@ namespace HdProduction.HelpDesk.Infrastructure.EfConfigurations
   {
     public void Configure(EntityTypeBuilder<TicketAttachment> builder)
     {
-      builder.Property(p => p.TicketId);
-      builder.Property(p => p.AttachmentKey).HasMaxLength(256);
+      builder.Property(a => a.TicketId);
+      builder.Property(a => a.AttachmentKey).HasMaxLength(256);
 
-      builder.HasKey(p => new {p.TicketId, p.AttachmentKey});
+      builder.HasKey(a => new {a.TicketId, a.AttachmentKey});
 
       builder.HasOne(a => a.Ticket)
         .WithMany(t => t.Attachments)
