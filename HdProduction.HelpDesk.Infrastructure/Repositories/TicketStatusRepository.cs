@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HdProduction.HelpDesk.Infrastructure.Repositories
 {
-    public class TicketStatusRepository: RepositoryBase<TicketStatus, long>, ITicketStatusRepository
+    public class TicketStatusRepository: RepositoryBase<TicketStatus, int>, ITicketStatusRepository
     {
         public TicketStatusRepository(ApplicationContext context) : base(context)
         {
@@ -15,6 +15,11 @@ namespace HdProduction.HelpDesk.Infrastructure.Repositories
         public Task<List<TicketStatus>> GetAllAsync()
         {
             return Context.TicketStatuses.ToListAsync();
+        }
+
+        public Task<TicketStatus> FindByNameAsync(string name)
+        {
+            return Context.TicketStatuses.FirstOrDefaultAsync(s => s.Name == name);
         }
     }
 }

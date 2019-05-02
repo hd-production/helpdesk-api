@@ -46,6 +46,10 @@ namespace HdProduction.HelpDesk.Api.Configuration
             services.AddScoped<ITicketsRepository, TicketsRepository>();
             services.AddScoped<ITicketStatusRepository, TicketStatusRepository>();
             services.AddScoped<ITicketStatusService, TicketStatusService>();
+            services.AddScoped<ITicketStatusSafeguard, TicketStatusSafeguard>();
+            services.AddScoped<ITicketPriorityRepository, TicketPriorityRepository>();
+            services.AddScoped<ITicketPriorityService, TicketPriorityService>();
+            services.AddScoped<ITicketPrioritySafeguard, TicketPrioritySafeguard>();
             services.AddScoped<ITicketService, TicketService>();
             services.AddScoped<ITicketActionRepository, TicketActionRepository>();
             services.AddScoped<ICommentRepository, CommentsRepository>();

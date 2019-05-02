@@ -4,12 +4,12 @@ using HdProduction.HelpDesk.Domain.Entities;
 
 namespace HdProduction.HelpDesk.Domain.Contract
 {
-    public interface ITicketStatusService
+    public interface ITicketPriorityService
     {
-        Task<TicketStatus> FindById(int id);
-        Task<List<TicketStatus>> GetAllAsync();
+        Task<TicketPriority> FindById(int id);
+        Task<List<TicketPriority>> GetAllAsync();
         Task<int> CreateAsync(string name);
-        Task UpdateAsync(int id, string name);
+        Task UpdateAsync(int id, string name); 
         Task DeleteAsync(int id);
     }
 }
