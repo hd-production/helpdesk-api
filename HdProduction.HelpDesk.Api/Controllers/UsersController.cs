@@ -1,25 +1,53 @@
 using System.Threading.Tasks;
+using AutoMapper;
+using HdProduction.App.Common.Auth;
+using HdProduction.HelpDesk.Api.Extensions;
 using HdProduction.HelpDesk.Api.Models.Users;
 using HdProduction.HelpDesk.Domain.Contract;
+using HdProduction.HelpDesk.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HdProduction.HelpDesk.Api.Controllers
 {
     [ApiController, ApiVersion("0")]
     [Route("users")]
-    public class UsersController
+    public class UsersController: ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
 
         [HttpPost("")]
-        public Task Create(UserRequestModel requestModel)
+        public async Task<UserResponseModel> Create(UserRequestModel requestModel)
         {
-            return _userService.CreateAsync(requestModel.Email, requestModel.PwdHash);
+            var userId = await _userService.CreateAsync(
+                requestModel.FirstName,
+                requestModel.LastName,
+                requestModel.Email,
+                requestModel.PwdHash
+            );
+            return await Find(userId);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<UserResponseModel> Find(long id)
+        {
+            var user = await _userService.FindAsync(id);
+            return _mapper.Map<User, UserResponseModel>(user);
+        }
+
+        [HttpGet("me")]    
+        [Authorize(AuthenticationSchemes = JwtDefaults.AuthenticationScheme)]
+        public async Task<UserResponseModel> FindMe()
+        {
+            long userId = User.GetId();
+            return await Find(userId);
         }
     }
 }

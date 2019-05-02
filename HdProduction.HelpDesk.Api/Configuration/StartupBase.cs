@@ -6,6 +6,7 @@ using HdProduction.App.Common;
 using HdProduction.App.Common.Auth;
 using HdProduction.HelpDesk.Api.Auth;
 using HdProduction.HelpDesk.Domain.Contract;
+using HdProduction.HelpDesk.Domain.Safeguards;
 using HdProduction.HelpDesk.Domain.Services;
 using HdProduction.HelpDesk.Infrastructure;
 using HdProduction.HelpDesk.Infrastructure.Repositories;
@@ -16,7 +17,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -52,6 +52,7 @@ namespace HdProduction.HelpDesk.Api.Configuration
             services.AddScoped<ISessionService, SessionsService>();
             services.AddScoped<ITokenService, JwtTokenService>(c => new JwtTokenService(Configuration.GetValue<string>("RsaKeysPath:Private")));
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserSafeguard, UserSafeguard>();
 
             services.AddSingleton(AutoMapperConfig.Configure());
 
