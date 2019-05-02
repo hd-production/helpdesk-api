@@ -17,7 +17,7 @@ namespace HdProduction.HelpDesk.Domain.Services
 
     public async Task<(string jwtToken, string refreshToken)> AuthenticateAsync(string email, string pwd)
     {
-      var user = await _userRepository.FindByEmail(email) ?? throw new EntityNotFoundException("User doesn't exist");
+      var user = await _userRepository.FindByEmailAsync(email) ?? throw new EntityNotFoundException("User doesn't exist");
       var securityHelper = new SecurityHelper(user.PwdSalt);
       if (securityHelper.CheckPassword(pwd, user.PwdSalt))
       {

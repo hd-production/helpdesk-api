@@ -11,7 +11,7 @@ namespace HdProduction.HelpDesk.Infrastructure.Repositories
         {
         }
 
-        public Task<User> FindByEmail(string email)
+        public Task<User> FindByEmailAsync(string email)
         {
             return Context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
