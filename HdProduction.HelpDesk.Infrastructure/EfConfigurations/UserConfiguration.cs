@@ -9,30 +9,30 @@ namespace HdProduction.HelpDesk.Infrastructure.EfConfigurations
   {
     protected override void ConfigureNext(EntityTypeBuilder<User> builder)
     {
-      builder.Property(p => p.Email)
+      builder.Property(u => u.Email)
         .IsRequired()
         .HasMaxLength(254);
 
-      builder.Property(p => p.FirstName)
+      builder.Property(u => u.FirstName)
         .IsRequired()
         .HasMaxLength(128);
 
-      builder.Property(p => p.LastName)
+      builder.Property(u => u.LastName)
         .IsRequired()
         .HasMaxLength(128);
 
-      builder.Property(p => p.PwdHash)
+      builder.Property(u => u.PwdHash)
         .IsRequired();
 
-      builder.Property(p => p.PwdSalt)
+      builder.Property(u => u.PwdSalt)
         .HasMaxLength(SecurityHelper.SaltLength)
         .IsFixedLength();
 
-      builder.Property(p => p.RefreshToken)
+      builder.Property(u => u.RefreshToken)
         .HasMaxLength(SecurityHelper.RefreshTokenLength)
         .IsFixedLength();
 
-      builder.Property(p => p.PermissionsRaw);
+      builder.Property(u => u.PermissionsRaw);
 
       base.ConfigureNext(builder);
     }

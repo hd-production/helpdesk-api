@@ -5,6 +5,7 @@ using AutoMapper;
 using HdProduction.App.Common.Auth;
 using HdProduction.HelpDesk.Api.Models.Tickets;
 using HdProduction.HelpDesk.Domain.Contract;
+using HdProduction.HelpDesk.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HdProduction.HelpDesk.Api.Controllers
@@ -43,10 +44,11 @@ namespace HdProduction.HelpDesk.Api.Controllers
       return await Get(id);
     }
 
-    [HttpPut("{id}/comment")]
-    public async Task<TicketAdminResponseModel> AddComment(long id, TicketRequestModel requestModel)
+    [HttpPost("{id}/comment")]
+    public async Task<TicketAdminResponseModel> AddComment(long id, CommentRequestModel requestModel)
     {
-      await _ticketService.UpdateAsync(id);
+      await _ticketService.AddCommentAsync(requestModel.TicketId, requestModel.Text,
+        requestModel.UserId, requestModel.ReplyToCommentId);
       return await Get(id);
     }
   }

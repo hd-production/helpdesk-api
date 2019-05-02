@@ -7,7 +7,7 @@ namespace HdProduction.HelpDesk.Infrastructure.EfConfigurations
     {
         protected override void ConfigureNext(EntityTypeBuilder<TicketStatus> builder)
         {
-            builder.Property(t => t.Name)
+            builder.Property(s => s.Name)
                 .IsRequired()
                 .HasMaxLength(32);
             
