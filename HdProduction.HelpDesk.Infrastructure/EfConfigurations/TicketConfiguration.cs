@@ -12,10 +12,14 @@ namespace HdProduction.HelpDesk.Infrastructure.EfConfigurations
         .IsRequired()
         .HasMaxLength(256);
 
+      builder.HasOne(e => e.Assignee)
+        .WithMany(e => e.Tickets);
+
       builder.Property(t => t.Details)
         .IsRequired();
 
       builder.Property(t => t.AssigneeId);
+      builder.Property(t => t.IssuerEmail);
 
       base.ConfigureNext(builder);
     }

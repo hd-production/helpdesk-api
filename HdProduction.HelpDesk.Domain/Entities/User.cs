@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HdProduction.HelpDesk.Domain.Entities
 {
@@ -27,6 +28,7 @@ namespace HdProduction.HelpDesk.Domain.Entities
       RefreshToken = refreshToken;
     }
     
+    public ICollection<Ticket> Tickets { get; } 
     public ICollection<Comment> Comments { get; } // ef
     public ICollection<TicketAction> Actions { get; } // ef
   }

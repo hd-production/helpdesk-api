@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using HdProduction.HelpDesk.Domain.Contract;
 using HdProduction.HelpDesk.Domain.Entities;
@@ -21,6 +22,16 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
       _ticketActionRepository = ticketActionRepository;
     }
 
+    public Task<Ticket> FindAsync(long id)
+    {
+      return _ticketsRepository.FindAsync(id);
+    }
+
+    public Task<List<Ticket>> GetAllAsync()
+    {
+      return _ticketsRepository.GetAllAsync();
+    }
+
     public async Task<long> CreateAsync(Ticket ticket)
     {
       _ticketsRepository.Add(ticket);
@@ -30,8 +41,7 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
 
     public async Task UpdateAsync(long id)
     {
-      var entity = await _ticketsRepository.FindAsync(id) ?? throw new EntityNotFoundException("Ticket not found");
-      
+      throw new NotImplementedException();
     }
 
     public Task AddCommentAsync(long ticketId, string text, long userId, long? replyToCommentId)
