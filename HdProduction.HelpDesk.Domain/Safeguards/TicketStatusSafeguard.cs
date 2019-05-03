@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using HdProduction.HelpDesk.Domain.Contract;
+using HdProduction.HelpDesk.Domain.Entities;
 using HdProduction.HelpDesk.Domain.Exceptions;
 
 namespace HdProduction.HelpDesk.Domain.Safeguards
@@ -17,15 +18,15 @@ namespace HdProduction.HelpDesk.Domain.Safeguards
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new BusinessLogicException("Name can't be empty");
+                throw ExceptionsHelper.Empty(nameof(name));
             }
-            if (name.Length > 32)
+            if (name.Length > TicketStatus.MaxNameLength)
             {
-                throw new BusinessLogicException("Name is too long");
+                throw ExceptionsHelper.LongLength(nameof(name));
             }
             if (await _ticketStatusRepository.FindByNameAsync(name) != null)
             {
-                throw new BusinessLogicException("There can not be duplicated names");
+                throw ExceptionsHelper.Duplicate(nameof(name));
             }
         }
     }

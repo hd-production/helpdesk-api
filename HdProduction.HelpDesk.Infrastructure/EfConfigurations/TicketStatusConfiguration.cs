@@ -9,7 +9,7 @@ namespace HdProduction.HelpDesk.Infrastructure.EfConfigurations
         {
             builder.Property(s => s.Name)
                 .IsRequired()
-                .HasMaxLength(32);
+                .HasMaxLength(TicketStatus.MaxNameLength);
             
             base.ConfigureNext(builder);
         }

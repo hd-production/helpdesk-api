@@ -46,7 +46,7 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
         public async Task<TicketPriority> FindById(int id)
         {
             return await _repository.FindAsync(id)
-                   ?? throw new EntityNotFoundException("Ticket priority doesn't exist");;
+                   ?? throw ExceptionsHelper.EntityNotFound("Ticket priority");;
         }
 
         public async Task DeleteAsync(int id)

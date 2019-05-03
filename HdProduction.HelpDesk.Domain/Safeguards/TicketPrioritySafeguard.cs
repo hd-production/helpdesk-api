@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using HdProduction.HelpDesk.Domain.Contract;
+using HdProduction.HelpDesk.Domain.Entities;
 using HdProduction.HelpDesk.Domain.Exceptions;
 
 namespace HdProduction.HelpDesk.Domain.Safeguards
@@ -19,7 +20,7 @@ namespace HdProduction.HelpDesk.Domain.Safeguards
             {
                 throw new BusinessLogicException("Name can't be empty");
             }
-            if (name.Length > 32)
+            if (name.Length > TicketPriority.MaxNameLength)
             {
                 throw new BusinessLogicException("Name is too long");
             }

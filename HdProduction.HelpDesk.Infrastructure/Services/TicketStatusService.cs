@@ -43,8 +43,8 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
         
         public async Task<TicketStatus> FindById(int id)
         {
-            return await _repository.FindAsync(id)
-                   ?? throw new EntityNotFoundException("Ticket status doesn't exist");;
+            return await _repository.FindAsync(id) 
+                   ?? throw ExceptionsHelper.EntityNotFound("Ticket status");;
         }
 
         public async Task DeleteAsync(int id)
