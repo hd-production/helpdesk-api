@@ -18,15 +18,15 @@ namespace HdProduction.HelpDesk.Domain.Safeguards
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new BusinessLogicException("Name can't be empty");
+                throw ExceptionsHelper.Empty(nameof(name));
             }
             if (name.Length > TicketPriority.MaxNameLength)
             {
-                throw new BusinessLogicException("Name is too long");
+                throw ExceptionsHelper.LongLength(nameof(name));
             }
             if (await _ticketPriorityRepository.FindByNameAsync(name) != null)
             {
-                throw new BusinessLogicException("There can not be duplicated names");
+                throw ExceptionsHelper.EntityAlreadyExists("Ticket priority", nameof(name));
             }
         }
     }

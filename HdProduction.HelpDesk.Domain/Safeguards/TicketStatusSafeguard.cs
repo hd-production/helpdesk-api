@@ -26,7 +26,7 @@ namespace HdProduction.HelpDesk.Domain.Safeguards
             }
             if (await _ticketStatusRepository.FindByNameAsync(name) != null)
             {
-                throw ExceptionsHelper.Duplicate(nameof(name));
+                throw ExceptionsHelper.EntityAlreadyExists("Ticket status", nameof(name));
             }
         }
     }
