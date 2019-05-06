@@ -18,11 +18,11 @@ namespace HdProduction.HelpDesk.Infrastructure.EfConfigurations
       builder.Property(t => t.AssigneeId);
 
       builder.HasOne(t => t.Status)
-        .WithMany(s => s.Tickets)
+        .WithMany()
         .HasForeignKey(t => t.StatusId);
 
       builder.HasOne(t => t.Priority)
-        .WithMany(p => p.Tickets)
+        .WithMany()
         .HasForeignKey(t => t.PriorityId);
 
       base.ConfigureNext(builder);

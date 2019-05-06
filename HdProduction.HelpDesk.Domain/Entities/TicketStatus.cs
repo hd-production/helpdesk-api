@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace HdProduction.HelpDesk.Domain.Entities
 {
   public class TicketStatus: EntityBase<int>
@@ -10,8 +8,6 @@ namespace HdProduction.HelpDesk.Domain.Entities
     }
 
     public string Name { set; get; }
-    
-    public ICollection<Ticket> Tickets { get; set; } // ef
 
     public const int MaxNameLength = 32;
   }
