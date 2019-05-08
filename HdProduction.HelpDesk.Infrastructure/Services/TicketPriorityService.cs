@@ -6,12 +6,14 @@ using HdProduction.HelpDesk.Domain.Exceptions;
 
 namespace HdProduction.HelpDesk.Infrastructure.Services
 {
-    public class TicketStatusService: ITicketStatusService
+    public class TicketPriorityService: ITicketPriorityService
     {
-        private readonly ITicketStatusRepository _repository;
-        private readonly ITicketStatusSafeguard _safeguard;
+        private readonly ITicketPriorityRepository _repository;
+        private readonly ITicketPrioritySafeguard _safeguard;
 
-        public TicketStatusService(ITicketStatusRepository repository, ITicketStatusSafeguard safeguard)
+
+        public TicketPriorityService(ITicketPriorityRepository repository, 
+            ITicketPrioritySafeguard safeguard)
         {
             _repository = repository;
             _safeguard = safeguard;
@@ -20,8 +22,8 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
         public async Task<int> CreateAsync(string name)
         {
             await _safeguard.EnsureNameAsync(name);
-            
-            var entity = new TicketStatus(name);
+
+            var entity = new TicketPriority(name);
             _repository.Add(entity);
             await _repository.SaveAsync();
             return entity.Id;
@@ -31,26 +33,26 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
         {
             await _safeguard.EnsureNameAsync(name);
 
-            var statusEntity = await FindById(id);
-            statusEntity.Name = name;
+            var entity = await FindById(id);
+            entity.Name = name;
             await _repository.SaveAsync();
         }
 
-        public async Task<List<TicketStatus>> GetAllAsync()
+        public async Task<List<TicketPriority>> GetAllAsync()
         {
             return await _repository.GetAllAsync();
         }
         
-        public async Task<TicketStatus> FindById(int id)
+        public async Task<TicketPriority> FindById(int id)
         {
-            return await _repository.FindAsync(id) 
-                   ?? throw ExceptionsHelper.EntityNotFound("Ticket status");;
+            return await _repository.FindAsync(id)
+                   ?? throw ExceptionsHelper.EntityNotFound("Ticket priority");;
         }
 
         public async Task DeleteAsync(int id)
         {
-            var ticketStatus = await FindById(id);
-            _repository.Remove(ticketStatus);
+            var entity = await FindById(id);
+            _repository.Remove(entity);
             await _repository.SaveAsync();
         }
     }

@@ -1,11 +1,8 @@
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 using AutoMapper;
-using HdProduction.App.Common.Auth;
 using HdProduction.HelpDesk.Api.Models.Tickets;
 using HdProduction.HelpDesk.Domain.Contract;
-using HdProduction.HelpDesk.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HdProduction.HelpDesk.Api.Controllers

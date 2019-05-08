@@ -1,4 +1,5 @@
 using System.Reflection;
+using HdProduction.HelpDesk.Api.Controllers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HdProduction.HelpDesk.Api.Configuration
@@ -7,7 +8,7 @@ namespace HdProduction.HelpDesk.Api.Configuration
   {
     public static IMvcCoreBuilder AddControllers(this IMvcCoreBuilder mvcCoreBuilder)
     {
-      var controllersAssembly = Assembly.Load("HdProduction.HelpDesk.Api");
+      var controllersAssembly = typeof(HomeController).Assembly;
       return mvcCoreBuilder.AddApplicationPart(controllersAssembly).AddControllersAsServices();
     }
   }

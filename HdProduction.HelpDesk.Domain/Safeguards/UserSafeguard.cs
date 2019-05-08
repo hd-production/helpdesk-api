@@ -18,12 +18,12 @@ namespace HdProduction.HelpDesk.Domain.Safeguards
         {
             if (!IsEmailValid(email))
             {
-                throw new BusinessLogicException("Email has wrong format");
+                throw ExceptionsHelper.WrongFormat(nameof(email));
             }
 
             if (await _userRepository.FindByEmailAsync(email) != null)
             {
-                throw new BusinessLogicException("User with such email already exists");
+                throw ExceptionsHelper.EntityAlreadyExists("User", nameof(email));
             }
         }
         

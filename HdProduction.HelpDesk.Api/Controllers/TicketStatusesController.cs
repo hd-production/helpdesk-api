@@ -21,39 +21,36 @@ namespace HdProduction.HelpDesk.Api.Controllers
             _ticketStatusService = ticketStatusService;
         }
         
-        [HttpGet()]
-        public async Task<List<TicketStatusResponse>> Get()
+        [HttpGet]
+        public async Task<IEnumerable<TicketStatusResponse>> Get()
         {
             var ticketStatuses = await _ticketStatusService.GetAllAsync();
-            return (from x in ticketStatuses
-                select _mapper.Map<TicketStatus, TicketStatusResponse>(x)).ToList();
+            return ticketStatuses.Select(_mapper.Map<TicketStatusResponse>);
         }
         
         [HttpGet("{id}")]
-        public async Task<TicketStatusResponse> Get(long id)
+        public async Task<TicketStatusResponse> Get(int id)
         {
             var ticketStatus = await _ticketStatusService.FindById(id);
             return _mapper.Map<TicketStatus, TicketStatusResponse>(ticketStatus);
         }
         
-        [HttpPost()]
+        [HttpPost]
         public async Task<TicketStatusResponse> Create(TicketStatusRequest ticketStatusData)
         {
-            var ticketStatus = _mapper.Map<TicketStatusRequest, TicketStatus>(ticketStatusData);
-            ticketStatus = await _ticketStatusService.CreateAsync(ticketStatus);
-            return _mapper.Map<TicketStatus, TicketStatusResponse>(ticketStatus);
+            var id = await _ticketStatusService.CreateAsync(ticketStatusData.Name);
+            return await Get(id);
         }
 
         [HttpPut("{id}")]
-        public async Task<TicketStatusResponse> Update(long id, TicketStatusRequest ticketStatusData)
+        public async Task<TicketStatusResponse> Update(int id, TicketStatusRequest ticketStatusData)
         {
-            var ticketStatus = _mapper.Map<TicketStatusRequest, TicketStatus>(ticketStatusData);
-            ticketStatus = await _ticketStatusService.UpdateAsync(id, ticketStatus);
-            return _mapper.Map<TicketStatus, TicketStatusResponse>(ticketStatus);
+            await _ticketStatusService.UpdateAsync(id, ticketStatusData.Name);
+            return await Get(id);
         }
         
         [HttpDelete("{id}")]
-        public Task Delete(long id)
+        public Task Delete(int id)
         {
             return _ticketStatusService.DeleteAsync(id);
         }
