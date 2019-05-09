@@ -5,13 +5,13 @@ using HdProduction.HelpDesk.Domain.Exceptions;
 
 namespace HdProduction.HelpDesk.Domain.Safeguards
 {
-    public class TicketPrioritySafeguard : ITicketPrioritySafeguard
+    public class IdNamedTicketAttributeSafeguard<T> where T : IdNamedTicketAttribute
     {
-        private readonly ITicketPriorityRepository _ticketPriorityRepository;
+        private readonly IIdNamedTicketAttributeRepository<T> _repository;
 
-        public TicketPrioritySafeguard(ITicketPriorityRepository ticketPriorityRepository)
+        public IdNamedTicketAttributeSafeguard(IIdNamedTicketAttributeRepository<T> repository)
         {
-            _ticketPriorityRepository = ticketPriorityRepository;
+            _repository = repository;
         }
 
         public async Task EnsureNameAsync(string name)
@@ -20,13 +20,13 @@ namespace HdProduction.HelpDesk.Domain.Safeguards
             {
                 throw ExceptionsHelper.Empty(nameof(name));
             }
-            if (name.Length > TicketPriority.MaxNameLength)
+            if (name.Length > IdNamedTicketAttribute.MaxNameLength)
             {
                 throw ExceptionsHelper.LongLength(nameof(name));
             }
-            if (await _ticketPriorityRepository.FindByNameAsync(name) != null)
+            if (await _repository.FindByNameAsync(name) != null)
             {
-                throw ExceptionsHelper.EntityAlreadyExists("Ticket priority", nameof(name));
+                throw ExceptionsHelper.EntityAlreadyExists(typeof(T).Name, nameof(name));
             }
         }
     }

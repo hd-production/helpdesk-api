@@ -1,14 +1,9 @@
 namespace HdProduction.HelpDesk.Domain.Entities
 {
-    public class TicketPriority : EntityBase<int>
+    public class TicketPriority : IdNamedTicketAttribute
     {
-        public TicketPriority(string name)
+        public TicketPriority()
         {
-            Name = name;
         }
-
-        public string Name { get; set; }
-
-        public const int MaxNameLength = 32;
     }
 }

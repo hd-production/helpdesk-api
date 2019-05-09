@@ -3,15 +3,19 @@ using System.Threading.Tasks;
 using HdProduction.HelpDesk.Domain.Contract;
 using HdProduction.HelpDesk.Domain.Entities;
 using HdProduction.HelpDesk.Domain.Exceptions;
+using HdProduction.HelpDesk.Domain.Safeguards;
 
 namespace HdProduction.HelpDesk.Infrastructure.Services
 {
-    public class TicketStatusService: ITicketStatusService
+    public class IdNamedTicketAttributeService<T> : IIdNamedTicketAttributeService<T> 
+        where T : IdNamedTicketAttribute, new()
     {
-        private readonly ITicketStatusRepository _repository;
-        private readonly ITicketStatusSafeguard _safeguard;
+        private readonly IIdNamedTicketAttributeRepository<T> _repository;
+        private readonly IdNamedTicketAttributeSafeguard<T> _safeguard;
 
-        public TicketStatusService(ITicketStatusRepository repository, ITicketStatusSafeguard safeguard)
+        public IdNamedTicketAttributeService(
+            IIdNamedTicketAttributeRepository<T> repository,
+            IdNamedTicketAttributeSafeguard<T> safeguard)
         {
             _repository = repository;
             _safeguard = safeguard;
@@ -20,8 +24,8 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
         public async Task<int> CreateAsync(string name)
         {
             await _safeguard.EnsureNameAsync(name);
-            
-            var entity = new TicketStatus(name);
+
+            var entity = new T {Name = name};
             _repository.Add(entity);
             await _repository.SaveAsync();
             return entity.Id;
@@ -36,15 +40,15 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
             await _repository.SaveAsync();
         }
 
-        public async Task<List<TicketStatus>> GetAllAsync()
+        public async Task<List<T>> GetAllAsync()
         {
             return await _repository.GetAllAsync();
         }
         
-        public async Task<TicketStatus> FindById(int id)
+        public async Task<T> FindById(int id)
         {
             return await _repository.FindAsync(id) 
-                   ?? throw ExceptionsHelper.EntityNotFound("Ticket status");;
+                   ?? throw ExceptionsHelper.EntityNotFound(typeof(T).Name);;
         }
 
         public async Task DeleteAsync(int id)

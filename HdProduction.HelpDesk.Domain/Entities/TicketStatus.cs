@@ -1,14 +1,9 @@
 namespace HdProduction.HelpDesk.Domain.Entities
 {
-  public class TicketStatus: EntityBase<int>
+  public class TicketStatus: IdNamedTicketAttribute
   {
-    public TicketStatus(string name)
+    public TicketStatus()
     {
-      Name = name;
     }
-
-    public string Name { set; get; }
-
-    public const int MaxNameLength = 32;
   }
 }
