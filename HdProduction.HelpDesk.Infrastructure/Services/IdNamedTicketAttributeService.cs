@@ -35,8 +35,8 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
         {
             await _safeguard.EnsureNameAsync(name);
 
-            var statusEntity = await FindById(id);
-            statusEntity.Name = name;
+            var entity = await FindById(id);
+            entity.Name = name;
             await _repository.SaveAsync();
         }
 
@@ -53,8 +53,8 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
 
         public async Task DeleteAsync(int id)
         {
-            var ticketStatus = await FindById(id);
-            _repository.Remove(ticketStatus);
+            var entity = await FindById(id);
+            _repository.Remove(entity);
             await _repository.SaveAsync();
         }
     }

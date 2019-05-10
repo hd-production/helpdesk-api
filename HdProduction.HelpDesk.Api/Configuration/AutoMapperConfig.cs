@@ -26,8 +26,8 @@ namespace HdProduction.HelpDesk.Api.Configuration
       cfg.CreateMap<Ticket, TicketAdminResponseModel>();
       cfg.CreateMap<Ticket, TicketItemResponseModel>();
 
-      cfg.CreateMap<TicketStatus, IdNamedTicketAttributeResponse>();
-      cfg.CreateMap<IdNamedTicketAttribute, IdNamedTicketAttributeRequest>();
+      cfg.CreateMap<IdNamedTicketAttribute, IdNamedTicketAttributeResponse>();
+      cfg.CreateMap<IdNamedTicketAttributeRequest, IdNamedTicketAttribute>();
 
       cfg.CreateMap<User, UserResponseModel>();
     }

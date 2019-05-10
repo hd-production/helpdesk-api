@@ -24,6 +24,10 @@ namespace HdProduction.HelpDesk.Infrastructure.EfConfigurations
       builder.HasOne(t => t.Priority)
         .WithMany()
         .HasForeignKey(t => t.PriorityId);
+      
+      builder.HasOne(t => t.Category)
+        .WithMany()
+        .HasForeignKey(t => t.CategoryId);
 
       base.ConfigureNext(builder);
     }
