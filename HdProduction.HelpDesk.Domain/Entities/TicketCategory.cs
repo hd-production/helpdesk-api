@@ -1,6 +1,6 @@
 namespace HdProduction.HelpDesk.Domain.Entities
 {
-    public class TicketCategory : IdNamedTicketAttribute
+    public class TicketCategory : TicketAttribute
     {
         public TicketCategory()
         {

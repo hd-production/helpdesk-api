@@ -4,7 +4,7 @@ using HdProduction.HelpDesk.Domain.Entities;
 
 namespace HdProduction.HelpDesk.Domain.Contract
 {
-    public interface IIdNamedTicketAttributeService<T>
+    public interface ITicketAttributeService<T>
     {
         Task<T> FindById(int id);
         Task<List<T>> GetAllAsync();

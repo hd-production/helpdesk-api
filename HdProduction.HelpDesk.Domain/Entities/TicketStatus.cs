@@ -1,6 +1,6 @@
 namespace HdProduction.HelpDesk.Domain.Entities
 {
-  public class TicketStatus: IdNamedTicketAttribute
+  public class TicketStatus: TicketAttribute
   {
     public TicketStatus()
     {

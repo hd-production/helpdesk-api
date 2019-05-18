@@ -1,5 +1,5 @@
 using AutoMapper;
-using HdProduction.HelpDesk.Api.Models.IdNamedTicketAttributes;
+using HdProduction.HelpDesk.Api.Models.TicketAttributes;
 using HdProduction.HelpDesk.Api.Models.Tickets;
 using HdProduction.HelpDesk.Api.Models.Users;
 using HdProduction.HelpDesk.Domain.Entities;
@@ -26,8 +26,8 @@ namespace HdProduction.HelpDesk.Api.Configuration
       cfg.CreateMap<Ticket, TicketAdminResponseModel>();
       cfg.CreateMap<Ticket, TicketItemResponseModel>();
 
-      cfg.CreateMap<IdNamedTicketAttribute, IdNamedTicketAttributeResponse>();
-      cfg.CreateMap<IdNamedTicketAttributeRequest, IdNamedTicketAttribute>();
+      cfg.CreateMap<TicketAttribute, TicketAttributeResponse>();
+      cfg.CreateMap<TicketAttributeRequest, TicketAttribute>();
 
       cfg.CreateMap<User, UserResponseModel>();
     }

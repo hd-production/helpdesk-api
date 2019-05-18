@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace HdProduction.HelpDesk.Api.Controllers
 {
     [Route("ticket-statuses"), ApiController, ApiVersion("0")]
-    public class TicketStatusesController : IdNamedTicketAttributeControllerBase<TicketStatus>
+    public class TicketStatusesController : TicketAttributeControllerBase<TicketStatus>
     {
-        public TicketStatusesController(IIdNamedTicketAttributeService<TicketStatus> service, IMapper mapper) 
+        public TicketStatusesController(ITicketAttributeService<TicketStatus> service, IMapper mapper) 
             : base(service, mapper)
         {
         }

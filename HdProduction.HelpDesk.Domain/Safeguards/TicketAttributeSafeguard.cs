@@ -5,11 +5,11 @@ using HdProduction.HelpDesk.Domain.Exceptions;
 
 namespace HdProduction.HelpDesk.Domain.Safeguards
 {
-    public class IdNamedTicketAttributeSafeguard<T> where T : IdNamedTicketAttribute
+    public class TicketAttributeSafeguard<T> where T : TicketAttribute
     {
-        private readonly IIdNamedTicketAttributeRepository<T> _repository;
+        private readonly ITicketAttributeRepository<T> _repository;
 
-        public IdNamedTicketAttributeSafeguard(IIdNamedTicketAttributeRepository<T> repository)
+        public TicketAttributeSafeguard(ITicketAttributeRepository<T> repository)
         {
             _repository = repository;
         }
@@ -20,7 +20,7 @@ namespace HdProduction.HelpDesk.Domain.Safeguards
             {
                 throw ExceptionsHelper.Empty(nameof(name));
             }
-            if (name.Length > IdNamedTicketAttribute.MaxNameLength)
+            if (name.Length > TicketAttribute.MaxNameLength)
             {
                 throw ExceptionsHelper.LongLength(nameof(name));
             }

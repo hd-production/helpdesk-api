@@ -4,7 +4,7 @@ using HdProduction.HelpDesk.Domain.Entities;
 
 namespace HdProduction.HelpDesk.Domain.Contract
 {
-    public interface IIdNamedTicketAttributeRepository<T> : IRepository<T, int> where T : IdNamedTicketAttribute
+    public interface ITicketAttributeRepository<T> : IRepository<T, int> where T : TicketAttribute
     {
         Task<List<T>> GetAllAsync();
         Task<T> FindByNameAsync(string name);

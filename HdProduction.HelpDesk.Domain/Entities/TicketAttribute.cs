@@ -1,8 +1,8 @@
 namespace HdProduction.HelpDesk.Domain.Entities
 {
-    public abstract class IdNamedTicketAttribute : EntityBase<int>
+    public abstract class TicketAttribute : EntityBase<int>
     {
-        protected IdNamedTicketAttribute()
+        protected TicketAttribute()
         {
         }
 

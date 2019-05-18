@@ -7,15 +7,15 @@ using HdProduction.HelpDesk.Domain.Safeguards;
 
 namespace HdProduction.HelpDesk.Infrastructure.Services
 {
-    public class IdNamedTicketAttributeService<T> : IIdNamedTicketAttributeService<T> 
-        where T : IdNamedTicketAttribute, new()
+    public class TicketAttributeService<T> : ITicketAttributeService<T> 
+        where T : TicketAttribute, new()
     {
-        private readonly IIdNamedTicketAttributeRepository<T> _repository;
-        private readonly IdNamedTicketAttributeSafeguard<T> _safeguard;
+        private readonly ITicketAttributeRepository<T> _repository;
+        private readonly TicketAttributeSafeguard<T> _safeguard;
 
-        public IdNamedTicketAttributeService(
-            IIdNamedTicketAttributeRepository<T> repository,
-            IdNamedTicketAttributeSafeguard<T> safeguard)
+        public TicketAttributeService(
+            ITicketAttributeRepository<T> repository,
+            TicketAttributeSafeguard<T> safeguard)
         {
             _repository = repository;
             _safeguard = safeguard;

@@ -45,17 +45,17 @@ namespace HdProduction.HelpDesk.Api.Configuration
 //            services.AddApiVersioning();
 
             services.AddScoped<ITicketsRepository, TicketsRepository>();
-            services.AddScoped<IdNamedTicketAttributeSafeguard<TicketStatus>>();
-            services.AddScoped<IIdNamedTicketAttributeRepository<TicketStatus>, IdNamedTicketAttributeRepository<TicketStatus>>();
-            services.AddScoped<IIdNamedTicketAttributeService<TicketStatus>, IdNamedTicketAttributeService<TicketStatus>>();
+            services.AddScoped<TicketAttributeSafeguard<TicketStatus>>();
+            services.AddScoped<ITicketAttributeRepository<TicketStatus>, TicketAttributeRepository<TicketStatus>>();
+            services.AddScoped<ITicketAttributeService<TicketStatus>, TicketAttributeService<TicketStatus>>();
 
-            services.AddScoped<IdNamedTicketAttributeSafeguard<TicketPriority>>();
-            services.AddScoped<IIdNamedTicketAttributeRepository<TicketPriority>, IdNamedTicketAttributeRepository<TicketPriority>>();
-            services.AddScoped<IIdNamedTicketAttributeService<TicketPriority>, IdNamedTicketAttributeService<TicketPriority>>();
+            services.AddScoped<TicketAttributeSafeguard<TicketPriority>>();
+            services.AddScoped<ITicketAttributeRepository<TicketPriority>, TicketAttributeRepository<TicketPriority>>();
+            services.AddScoped<ITicketAttributeService<TicketPriority>, TicketAttributeService<TicketPriority>>();
             
-            services.AddScoped<IdNamedTicketAttributeSafeguard<TicketCategory>>();
-            services.AddScoped<IIdNamedTicketAttributeRepository<TicketCategory>, IdNamedTicketAttributeRepository<TicketCategory>>();
-            services.AddScoped<IIdNamedTicketAttributeService<TicketCategory>, IdNamedTicketAttributeService<TicketCategory>>();
+            services.AddScoped<TicketAttributeSafeguard<TicketCategory>>();
+            services.AddScoped<ITicketAttributeRepository<TicketCategory>, TicketAttributeRepository<TicketCategory>>();
+            services.AddScoped<ITicketAttributeService<TicketCategory>, TicketAttributeService<TicketCategory>>();
             
             services.AddScoped<ITicketService, TicketService>();
             services.AddScoped<ITicketActionRepository, TicketActionRepository>();

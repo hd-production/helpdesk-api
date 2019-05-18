@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HdProduction.HelpDesk.Infrastructure.Repositories
 {
-    public class IdNamedTicketAttributeRepository<T> : RepositoryBase<T, int>, IIdNamedTicketAttributeRepository<T>
-        where T : IdNamedTicketAttribute
+    public class TicketAttributeRepository<T> : RepositoryBase<T, int>, ITicketAttributeRepository<T>
+        where T : TicketAttribute
     {
-        public IdNamedTicketAttributeRepository(ApplicationContext context) : base(context)
+        public TicketAttributeRepository(ApplicationContext context) : base(context)
         {
         }
 
