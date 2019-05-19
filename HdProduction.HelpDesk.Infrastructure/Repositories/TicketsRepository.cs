@@ -19,6 +19,8 @@ namespace HdProduction.HelpDesk.Infrastructure.Repositories
         .Include(e => e.Comments)
         .Include(e => e.Actions)
         .Include(e => e.TicketStatus)
+        .Include(e => e.Category)
+        .Include(e => e.Priority)
         .FirstOrDefaultAsync(e => e.Id == id);
 
       return entity;
@@ -26,11 +28,12 @@ namespace HdProduction.HelpDesk.Infrastructure.Repositories
     
     public async Task<List<Ticket>> GetAllAsync(bool trackEntities = true)
     {
-
       var entities = Context.Tickets
         .Include(e => e.Attachments)
         .Include(e => e.Comments)
         .Include(e => e.Actions)
+        .Include(e => e.Category)
+        .Include(e => e.Priority)
         .Include(e => e.TicketStatus);
       
       return trackEntities

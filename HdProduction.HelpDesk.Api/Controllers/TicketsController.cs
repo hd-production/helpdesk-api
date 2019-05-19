@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using HdProduction.HelpDesk.Api.Models.Tickets;
@@ -21,9 +22,10 @@ namespace HdProduction.HelpDesk.Api.Controllers
     }
     
     [HttpGet("")]
-    public async Task<List<TicketResponseModel>> Get()
+    public async Task<IEnumerable<TicketResponseModel>> Get()
     {
-      return _mapper.Map<List<TicketResponseModel>>(await _ticketService.GetAllAsync());
+      var tickets = await _ticketService.GetAllAsync();
+      return tickets.Select(_mapper.Map<TicketResponseModel>);
     }
     
     [HttpGet("{id}")]
