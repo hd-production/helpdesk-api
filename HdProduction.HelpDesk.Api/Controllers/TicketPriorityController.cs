@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HdProduction.HelpDesk.Api.Controllers
 {
-    [Route("ticket-statuses"), ApiController, ApiVersion("0")]
-    public class TicketStatusesController : TicketAttributeControllerBase<TicketStatus>
+    [Route("ticket-priorities"), ApiController, ApiVersion("0")]
+    public class TicketPriorityController: TicketAttributeControllerBase<TicketPriority>
     {
-        public TicketStatusesController(ITicketAttributeService<TicketStatus> service, IMapper mapper) 
+        public TicketPriorityController(ITicketAttributeService<TicketPriority> service, IMapper mapper) 
             : base(service, mapper)
         {
         }

@@ -1,10 +1,8 @@
 using System;
 using System.Net;
-using System.Reflection;
 using System.Threading.Tasks;
 using HdProduction.App.Common;
 using HdProduction.HelpDesk.Domain.Exceptions;
-using log4net;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 

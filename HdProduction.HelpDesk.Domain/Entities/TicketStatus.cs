@@ -1,7 +1,9 @@
 namespace HdProduction.HelpDesk.Domain.Entities
 {
-  public class TicketStatus: EntityBase<long>
+  public class TicketStatus: TicketAttribute
   {
-    public string Name { set; get; }
+    public TicketStatus()
+    {
+    }
   }
 }

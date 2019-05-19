@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HdProduction.HelpDesk.Infrastructure.EfConfigurations
 {
-    public class TicketStatusConfiguration : EntityBaseConfiguration<TicketStatus, int>
+    public class TicketCategoryConfiguration : EntityBaseConfiguration<TicketCategory, int>
     {
-        protected override void ConfigureNext(EntityTypeBuilder<TicketStatus> builder)
+        protected override void ConfigureNext(EntityTypeBuilder<TicketCategory> builder)
         {
             builder.Property(s => s.Name)
                 .IsRequired()
-                .HasMaxLength(TicketStatus.MaxNameLength);
+                .HasMaxLength(TicketCategory.MaxNameLength);
             
             base.ConfigureNext(builder);
         }

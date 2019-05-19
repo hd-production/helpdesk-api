@@ -21,6 +21,18 @@ namespace HdProduction.HelpDesk.Infrastructure.EfConfigurations
       builder.Property(t => t.AssigneeId);
       builder.Property(t => t.IssuerEmail);
 
+      builder.HasOne(t => t.Status)
+        .WithMany()
+        .HasForeignKey(t => t.StatusId);
+
+      builder.HasOne(t => t.Priority)
+        .WithMany()
+        .HasForeignKey(t => t.PriorityId);
+      
+      builder.HasOne(t => t.Category)
+        .WithMany()
+        .HasForeignKey(t => t.CategoryId);
+
       base.ConfigureNext(builder);
     }
   }

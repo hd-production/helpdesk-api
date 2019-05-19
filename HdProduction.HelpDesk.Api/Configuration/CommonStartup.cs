@@ -6,6 +6,7 @@ using HdProduction.App.Common;
 using HdProduction.App.Common.Auth;
 using HdProduction.HelpDesk.Api.Auth;
 using HdProduction.HelpDesk.Domain.Contract;
+using HdProduction.HelpDesk.Domain.Entities;
 using HdProduction.HelpDesk.Domain.Safeguards;
 using HdProduction.HelpDesk.Domain.Services;
 using HdProduction.HelpDesk.Infrastructure;
@@ -44,8 +45,18 @@ namespace HdProduction.HelpDesk.Api.Configuration
 //            services.AddApiVersioning();
 
             services.AddScoped<ITicketsRepository, TicketsRepository>();
-            services.AddScoped<ITicketStatusRepository, TicketStatusRepository>();
-            services.AddScoped<ITicketStatusService, TicketStatusService>();
+            services.AddScoped<TicketAttributeSafeguard<TicketStatus>>();
+            services.AddScoped<ITicketAttributeRepository<TicketStatus>, TicketAttributeRepository<TicketStatus>>();
+            services.AddScoped<ITicketAttributeService<TicketStatus>, TicketAttributeService<TicketStatus>>();
+
+            services.AddScoped<TicketAttributeSafeguard<TicketPriority>>();
+            services.AddScoped<ITicketAttributeRepository<TicketPriority>, TicketAttributeRepository<TicketPriority>>();
+            services.AddScoped<ITicketAttributeService<TicketPriority>, TicketAttributeService<TicketPriority>>();
+            
+            services.AddScoped<TicketAttributeSafeguard<TicketCategory>>();
+            services.AddScoped<ITicketAttributeRepository<TicketCategory>, TicketAttributeRepository<TicketCategory>>();
+            services.AddScoped<ITicketAttributeService<TicketCategory>, TicketAttributeService<TicketCategory>>();
+            
             services.AddScoped<ITicketService, TicketService>();
             services.AddScoped<ITicketActionRepository, TicketActionRepository>();
             services.AddScoped<ICommentRepository, CommentsRepository>();
