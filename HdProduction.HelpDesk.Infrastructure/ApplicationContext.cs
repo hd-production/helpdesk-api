@@ -14,6 +14,7 @@ namespace HdProduction.HelpDesk.Infrastructure
     public DbSet<Ticket> Tickets { get; set; }
     public DbSet<TicketStatus> TicketStatuses { get; set; }
     public DbSet<TicketPriority> TicketPriorities { get; set; }
+    public DbSet<TicketCategory> TicketCategories { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<TicketAttachment> Attachments { get; set; }
     public DbSet<TicketAction> Actions { get; set; }
@@ -28,6 +29,7 @@ namespace HdProduction.HelpDesk.Infrastructure
       modelBuilder.ApplyConfiguration(new UserConfiguration());
       modelBuilder.ApplyConfiguration(new TicketStatusConfiguration());
       modelBuilder.ApplyConfiguration(new TicketPriorityConfiguration());
+      modelBuilder.ApplyConfiguration(new TicketCategoryConfiguration());
 
       base.OnModelCreating(modelBuilder);
     }

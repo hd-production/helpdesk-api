@@ -1,8 +1,8 @@
 namespace HdProduction.HelpDesk.Domain.Entities
 {
-    public class TicketPriority : TicketAttribute
+    public class TicketCategory : TicketAttribute
     {
-        public TicketPriority()
+        public TicketCategory()
         {
         }
     }
