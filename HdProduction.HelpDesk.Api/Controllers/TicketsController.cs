@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using HdProduction.HelpDesk.Api.Models.Tickets;
@@ -11,26 +13,46 @@ namespace HdProduction.HelpDesk.Api.Controllers
   public class TicketsController : ControllerBase
   {
     private readonly IMapper _mapper;
-    private readonly ITicketsRepository _ticketsRepository;
     private readonly ITicketService _ticketService;
 
-    public TicketsController(IMapper mapper, ITicketsRepository ticketsRepository, ITicketService ticketService)
+    public TicketsController(IMapper mapper, ITicketService ticketService)
     {
       _mapper = mapper;
-      _ticketsRepository = ticketsRepository;
       _ticketService = ticketService;
     }
-
-    [HttpGet("{id}")]
-    public async Task<TicketAdminResponseModel> Get(long id)
+    
+    [HttpGet("")]
+    public async Task<IEnumerable<TicketResponseModel>> Get()
     {
-      return _mapper.Map<TicketAdminResponseModel>(await _ticketsRepository.FindAsync(id));
+      var tickets = await _ticketService.GetAllAsync();
+      return tickets.Select(_mapper.Map<TicketResponseModel>);
+    }
+    
+    [HttpGet("{id}")]
+    public async Task<TicketResponseModel> Get(long id)
+    {
+      return _mapper.Map<TicketResponseModel>(await _ticketService.FindAsync(id));
+    }
+    
+    [HttpPost("")]
+    public async Task<TicketResponseModel> Create(TicketRequestModel requestModel)
+    {
+      var id = await _ticketService.CreateAsync(requestModel.Issue, requestModel.Details, requestModel.IssuerEmail);
+      return await Get(id); 
+    }
+    
+    [HttpPut("{id}")]
+    public async Task<TicketResponseModel> Update(long id, TicketRequestModel requestModel)
+    {
+      await _ticketService.UpdateAsync(id);
+      return await Get(id);
     }
 
-    [HttpPost("")]
-    public async Task<TicketAdminResponseModel> Create(TicketRequestModel requestModel)
+    [HttpPost("{id}/comment")]
+    public async Task<TicketResponseModel> AddComment(long id, CommentRequestModel requestModel)
     {
-      var id = await _ticketService.CreateAsync(_mapper.Map<Ticket>(requestModel));
+      await _ticketService.AddCommentAsync(requestModel.TicketId, requestModel.Text,
+        requestModel.UserId, requestModel.ReplyToCommentId);
       return await Get(id);
     }
   }
