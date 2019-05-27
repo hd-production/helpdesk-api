@@ -37,7 +37,7 @@ namespace HdProduction.HelpDesk.Api.Controllers
     [HttpPost("")]
     public async Task<TicketResponseModel> Create(TicketRequestModel requestModel)
     {
-      var id = await _ticketService.CreateAsync(new Ticket(requestModel.Issue, requestModel.Details, requestModel.IssuerEmail));
+      var id = await _ticketService.CreateAsync(requestModel.Issue, requestModel.Details, requestModel.IssuerEmail);
       return await Get(id); 
     }
     
