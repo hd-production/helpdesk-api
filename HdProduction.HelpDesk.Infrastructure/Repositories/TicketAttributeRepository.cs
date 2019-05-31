@@ -22,5 +22,10 @@ namespace HdProduction.HelpDesk.Infrastructure.Repositories
         {
             return Context.Set<T>().FirstOrDefaultAsync(s => s.Name == name);
         }
+
+        public async Task<TicketAttribute> FindDefaultAsync()
+        {
+            return await Context.Set<T>().FirstOrDefaultAsync(s => s.Default);
+        }
     }
 }

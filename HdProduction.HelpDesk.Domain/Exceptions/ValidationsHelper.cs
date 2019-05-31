@@ -21,10 +21,15 @@ namespace HdProduction.HelpDesk.Domain.Exceptions
         {
             return new BusinessLogicException($"{param} has wrong format");
         }
-        
+
         public static EntityNotFoundException EntityNotFound(string entity = "Entity")
         {
             return new EntityNotFoundException($"{entity} doesn't exist");
+        }
+
+        public static ForbiddenAccessException UserDontHaveRights()
+        {
+            return new ForbiddenAccessException("User don't have rights for action");
         }
     }
 }

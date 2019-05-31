@@ -35,15 +35,14 @@ namespace HdProduction.HelpDesk.Api.Controllers
             return await Find(userId);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public async Task<UserResponseModel> Find(long id)
         {
             var user = await _userService.FindAsync(id);
             return _mapper.Map<User, UserResponseModel>(user);
         }
 
-        [HttpGet("me")]    
-        [Authorize(AuthenticationSchemes = JwtDefaults.AuthenticationScheme)]
+        [HttpGet("me"), Authorize]
         public async Task<UserResponseModel> FindMe()
         {
             long userId = User.GetId();

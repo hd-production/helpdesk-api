@@ -1,6 +1,8 @@
 ﻿using HdProduction.HelpDesk.Api.Configuration;
+using HdProduction.HelpDesk.Domain.Contract;
 using HdProduction.HelpDesk.Infrastructure;
 using HdProduction.Infrastructure.PostgresSql;
+using HdProduction.Modules.Global;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +22,9 @@ namespace HelpDesk.App.Global
       services.AddDbContext<ApplicationContext>(options =>
         options.UseNpgsql(Configuration.GetConnectionString("Db"),
           b => b.MigrationsAssembly(typeof(ApplicationContextDesignFactory).Assembly.FullName)));
+
+      services.AddTransient<IAttachmentUploader, ContentStorageAttachmentUploader>(c =>
+        new ContentStorageAttachmentUploader(Configuration.GetValue<string>("Uris:ContentStorage")));
     }
   }
 }

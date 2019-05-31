@@ -16,7 +16,7 @@ namespace HdProduction.HelpDesk.Domain.Entities
     }
 
     public long TicketId { get; }
-    public string Text { get; }
+    public string Text { get; set; }
     public long UserId { get; }
     public long? ReplyToCommentId { get; }
     public DateTime CreatedAt { get; }
