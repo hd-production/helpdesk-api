@@ -1,4 +1,3 @@
-using System.Reflection;
 using HdProduction.HelpDesk.Api.Controllers;
 using Microsoft.Extensions.DependencyInjection;
 

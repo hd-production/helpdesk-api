@@ -8,7 +8,7 @@ namespace HdProduction.HelpDesk.Api.Controllers
     [Route("ticket-priorities"), ApiController, ApiVersion("0")]
     public class TicketPriorityController: TicketAttributeControllerBase<TicketPriority>
     {
-        public TicketPriorityController(ITicketAttributeService<TicketPriority> service, IMapper mapper) 
+        public TicketPriorityController(ITicketAttributeService<TicketPriority> service, IMapper mapper)
             : base(service, mapper)
         {
         }

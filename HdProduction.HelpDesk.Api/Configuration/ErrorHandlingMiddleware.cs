@@ -14,10 +14,11 @@ namespace HdProduction.HelpDesk.Api.Configuration
     {
     }
 
-    protected override Task HandleExceptionAsync(HttpContext context, Exception exception)
+    protected override Task HandleExceptionAsync(HttpContext context, Exception ex)
     {
       string message;
       var statusCode = HttpStatusCode.InternalServerError;
+      var exception = ex.GetBaseException();
 
       switch (exception)
       {
@@ -27,6 +28,10 @@ namespace HdProduction.HelpDesk.Api.Configuration
           break;
         case BusinessLogicException _:
           statusCode = HttpStatusCode.BadRequest;
+          message = exception.Message;
+          break;
+        case UnauthorizedAccessException _:
+          statusCode = HttpStatusCode.Unauthorized;
           message = exception.Message;
           break;
         default:

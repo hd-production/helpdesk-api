@@ -6,7 +6,7 @@ namespace HdProduction.HelpDesk.Domain.Entities
   {
     public TicketAction(long ticketId, long userId, ActionType type, DateTime time,
       long? oldAssigneeId = default, long? newAssigneeId = default, int? oldStatusId = default, int? newStatusId = default,
-      long? commentId = default)
+      long? commentId = default, Guid? attachmentKey = default)
     {
       TicketId = ticketId;
       UserId = userId;
@@ -17,6 +17,7 @@ namespace HdProduction.HelpDesk.Domain.Entities
       OldStatusId = oldStatusId;
       NewStatusId = newStatusId;
       CommentId = commentId;
+      AttachmentKey = attachmentKey;
     }
 
     public long TicketId { get; }
@@ -29,6 +30,7 @@ namespace HdProduction.HelpDesk.Domain.Entities
     public int? OldStatusId { get; }
     public int? NewStatusId { get; }
     public long? CommentId { get; }
+    public Guid? AttachmentKey { get; }
 
     public Ticket Ticket { get; set; } // ef
     public User User { get; set; } // ef

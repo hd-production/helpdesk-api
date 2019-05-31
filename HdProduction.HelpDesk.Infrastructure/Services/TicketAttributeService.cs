@@ -20,7 +20,7 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
             _repository = repository;
             _safeguard = safeguard;
         }
-        
+
         public async Task<int> CreateAsync(string name)
         {
             await _safeguard.EnsureNameAsync(name);
@@ -44,10 +44,10 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
         {
             return await _repository.GetAllAsync();
         }
-        
+
         public async Task<T> FindById(int id)
         {
-            return await _repository.FindAsync(id) 
+            return await _repository.FindAsync(id)
                    ?? throw ExceptionsHelper.EntityNotFound(typeof(T).Name);;
         }
 

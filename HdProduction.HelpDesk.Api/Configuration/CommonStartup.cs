@@ -52,14 +52,15 @@ namespace HdProduction.HelpDesk.Api.Configuration
             services.AddScoped<TicketAttributeSafeguard<TicketPriority>>();
             services.AddScoped<ITicketAttributeRepository<TicketPriority>, TicketAttributeRepository<TicketPriority>>();
             services.AddScoped<ITicketAttributeService<TicketPriority>, TicketAttributeService<TicketPriority>>();
-            
+
             services.AddScoped<TicketAttributeSafeguard<TicketCategory>>();
             services.AddScoped<ITicketAttributeRepository<TicketCategory>, TicketAttributeRepository<TicketCategory>>();
             services.AddScoped<ITicketAttributeService<TicketCategory>, TicketAttributeService<TicketCategory>>();
-            
+
             services.AddScoped<ITicketService, TicketService>();
             services.AddScoped<ITicketActionRepository, TicketActionRepository>();
             services.AddScoped<ICommentRepository, CommentsRepository>();
+            services.AddScoped<IAttachmentRepository, AttachmentRepository>();
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISessionService, SessionsService>();
@@ -85,9 +86,10 @@ namespace HdProduction.HelpDesk.Api.Configuration
                 app.UseHsts();
             }
 
-            Task.Run(() => ConfigureDbAsync(app));
+//            Task.Run(() => ConfigureDbAsync(app));
             app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseCors(Configuration);
+            app.UseAuthentication();
             app.UseMvc();
 
             Logger.Info("Application is started");

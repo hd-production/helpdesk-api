@@ -7,7 +7,8 @@ namespace HdProduction.HelpDesk.Domain.Entities
         }
 
         public string Name { set; get; }
-            
+        public bool Default { set; get; }
+
         public const int MaxNameLength = 32;
     }
 }

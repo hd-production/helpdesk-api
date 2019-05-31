@@ -10,7 +10,8 @@ namespace HdProduction.HelpDesk.Infrastructure.EfConfigurations
             builder.Property(s => s.Name)
                 .IsRequired()
                 .HasMaxLength(TicketCategory.MaxNameLength);
-            
+            builder.Property(s => s.Default);
+
             base.ConfigureNext(builder);
         }
     }

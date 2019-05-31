@@ -18,6 +18,7 @@ namespace HdProduction.HelpDesk.Infrastructure.EfConfigurations
       builder.Property(ta => ta.OldStatusId);
       builder.Property(ta => ta.NewStatusId);
       builder.Property(ta => ta.CommentId);
+      builder.Property(ta => ta.AttachmentKey);
 
       builder.HasOne(ta => ta.User)
         .WithMany(u => u.Actions)

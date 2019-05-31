@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 namespace HdProduction.HelpDesk.Infrastructure.Repositories
 {
     public abstract class RepositoryBase<T, TKey> : IRepository<T, TKey> 
-        where T : EntityBase<TKey> where TKey : struct
+        where T : class, IEntity<TKey>
+        where TKey : struct
     {
         protected readonly ApplicationContext Context;
 
@@ -17,9 +18,9 @@ namespace HdProduction.HelpDesk.Infrastructure.Repositories
 
         public Task<T> FindAsync(TKey id, bool withTracking = true)
         {
-            return withTracking 
+            return withTracking
                 ? Context.Set<T>().FindAsync(id)
-                : Context.Set<T>().AsNoTracking().FirstOrDefaultAsync(e => e.Id.Equals(id));
+                : Context.Set<T>().AsNoTracking().FirstOrDefaultAsync(e => e.Key.Equals(id));
         }
 
         public void Add(T entity)

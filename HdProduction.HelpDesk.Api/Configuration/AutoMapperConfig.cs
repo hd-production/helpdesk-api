@@ -1,4 +1,6 @@
 using AutoMapper;
+using HdProduction.HelpDesk.Api.Models.Actions;
+using HdProduction.HelpDesk.Api.Models.Comments;
 using HdProduction.HelpDesk.Api.Models.TicketAttributes;
 using HdProduction.HelpDesk.Api.Models.Tickets;
 using HdProduction.HelpDesk.Api.Models.Users;
@@ -23,7 +25,10 @@ namespace HdProduction.HelpDesk.Api.Configuration
 
     private static void CreateMapping(IProfileExpression cfg)
     {
-      cfg.CreateMap<Ticket, TicketResponseModel>();
+      cfg.CreateMap<Ticket, TicketResponse>();
+      cfg.CreateMap<Comment, CommentResponse>();
+      cfg.CreateMap<TicketAction, TicketActionResponse>();
+      cfg.CreateMap<TicketAttachment, TicketAttachmentResponse>();
 
       cfg.CreateMap<TicketAttribute, TicketAttributeResponse>();
       cfg.CreateMap<TicketAttributeRequest, TicketAttribute>();

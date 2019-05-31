@@ -5,10 +5,12 @@ using AutoMapper;
 using HdProduction.HelpDesk.Api.Models.TicketAttributes;
 using HdProduction.HelpDesk.Domain.Contract;
 using HdProduction.HelpDesk.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HdProduction.HelpDesk.Api.Controllers
 {
+    [Authorize]
     public abstract class TicketAttributeControllerBase<T> : ControllerBase
         where T : TicketAttribute
     {
@@ -20,21 +22,21 @@ namespace HdProduction.HelpDesk.Api.Controllers
             _mapper = mapper;
             _service = service;
         }
-        
+
         [HttpGet]
         public async Task<IEnumerable<TicketAttributeResponse>> Get()
         {
             var entities = await _service.GetAllAsync();
             return entities.Select(_mapper.Map<TicketAttributeResponse>);
         }
-        
+
         [HttpGet("{id}")]
         public async Task<TicketAttributeResponse> Get(int id)
         {
             var entity = await _service.FindById(id);
             return _mapper.Map<TicketAttributeResponse>(entity);
         }
-        
+
         [HttpPost]
         public async Task<TicketAttributeResponse> Create(TicketAttributeRequest ticketAttributeData)
         {
@@ -48,7 +50,7 @@ namespace HdProduction.HelpDesk.Api.Controllers
             await _service.UpdateAsync(id, ticketAttributeData.Name);
             return await Get(id);
         }
-        
+
         [HttpDelete("{id}")]
         public Task Delete(int id)
         {

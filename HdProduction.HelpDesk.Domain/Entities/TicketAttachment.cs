@@ -1,16 +1,22 @@
+using System;
+
 namespace HdProduction.HelpDesk.Domain.Entities
 {
-  public class TicketAttachment
+  public class TicketAttachment : IEntity<Guid>
   {
-    public TicketAttachment(long ticketId, string attachmentKey)
+    public TicketAttachment(long ticketId, Guid key, string url)
     {
       TicketId = ticketId;
-      AttachmentKey = attachmentKey;
+      Key = key;
+      Url = url;
     }
 
     public long TicketId { get; }
-    public string AttachmentKey { get; }
+    public Guid Key { get; }
+    public string Url { get; }
 
     public Ticket Ticket { get; set; } // ef
+
+    public const int MaxUrlLength = 256;
   }
 }
