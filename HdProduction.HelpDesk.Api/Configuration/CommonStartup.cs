@@ -86,7 +86,7 @@ namespace HdProduction.HelpDesk.Api.Configuration
                 app.UseHsts();
             }
 
-//            Task.Run(() => ConfigureDbAsync(app));
+            Task.Run(() => ConfigureDbAsync(app));
             app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseCors(Configuration);
             app.UseAuthentication();
