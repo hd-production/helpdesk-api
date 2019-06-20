@@ -7,4 +7,12 @@ namespace HdProduction.HelpDesk.Domain.Contract
   {
     Task<string> UploadAsync(string fileName, Stream stream);
   }
+
+  public class FakeAttachmentUploader : IAttachmentUploader
+  {
+    public Task<string> UploadAsync(string fileName, Stream stream)
+    {
+      return Task.FromResult(string.Empty);
+    }
+  }
 }

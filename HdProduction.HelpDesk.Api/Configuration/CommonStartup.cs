@@ -67,6 +67,8 @@ namespace HdProduction.HelpDesk.Api.Configuration
             services.AddScoped<ITokenService, JwtTokenService>(c => new JwtTokenService(Configuration.GetValue<string>("RsaKeysPath:Private")));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserSafeguard, UserSafeguard>();
+            services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IAttachmentUploader, FakeAttachmentUploader>();
 
             services.AddSingleton(AutoMapperConfig.Configure());
 

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using HdProduction.HelpDesk.Domain.Contract;
 using HdProduction.HelpDesk.Domain.Entities;
@@ -10,22 +11,28 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IUserSafeguard _safeguard;
+        private readonly IEmailService _emailService;
 
-        public UserService(IUserRepository userRepository, IUserSafeguard safeguard)
+        public UserService(IUserRepository userRepository, IUserSafeguard safeguard, IEmailService emailService)
         {
             _userRepository = userRepository;
             _safeguard = safeguard;
+            _emailService = emailService;
         }
 
-        public async Task<long> CreateAsync(string firstName, string lastName, string email, string pwdHash)
+        public async Task<long> CreateAsync(string firstName, string lastName, string email)
         {
             await _safeguard.EnsureEmailAsync(email);
             // TODO _safeguard.EnsureName(lastName, firstName); etc.
 
+            var password = GeneratePassword();
+            var pwdHash = SecurityHelper.CreateMd5Hash(password);
             var pwdHelper = SecurityHelper.Create();
             var user = new User(email, firstName, lastName, "",
                 pwdHelper.CreateSaltedPassword(pwdHash), pwdHelper.Salt);
             _userRepository.Add(user);
+
+            await _emailService.SendMailInvitationAsync(email, password);
             await _userRepository.SaveAsync();
             return user.Id;
         }
@@ -34,6 +41,11 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
         {
             return await _userRepository.FindAsync(id) 
                    ?? throw new EntityNotFoundException("User with such id not found.");
+        }
+
+        private static string GeneratePassword()
+        {
+            return Guid.NewGuid().ToString("N");
         }
     }
 }

@@ -52,6 +52,8 @@ namespace HdProduction.HelpDesk.Domain.Services
       }
     }
 
+    public static string CreateMd5Hash(string input) => BinaryToHex(HashMd5(input));
+    
     private static string BinaryToHex(byte[] data)
     {
       var hex = new StringBuilder(data.Length * 2);

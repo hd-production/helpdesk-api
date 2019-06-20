@@ -7,7 +7,7 @@ namespace HdProduction.HelpDesk.Api.Models.Tickets
 {
     public class TicketResponse : TicketRequest
     {
-        public long Id { get; set; }
+        public long Id { get; set; } 
         public TicketAttributeResponse Status {get;set;}
         public TicketAttributeResponse Priority { get; set; }
         public TicketAttributeResponse Category { get; set; }

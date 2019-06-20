@@ -29,8 +29,7 @@ namespace HdProduction.HelpDesk.Api.Controllers
             var userId = await _userService.CreateAsync(
                 requestModel.FirstName,
                 requestModel.LastName,
-                requestModel.Email,
-                requestModel.PwdHash
+                requestModel.Email
             );
             return await Find(userId);
         }

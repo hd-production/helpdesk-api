@@ -23,8 +23,8 @@ namespace HelpDesk.App.Global
         options.UseNpgsql(Configuration.GetConnectionString("Db"),
           b => b.MigrationsAssembly(typeof(ApplicationContextDesignFactory).Assembly.FullName)));
 
-      services.AddTransient<IAttachmentUploader, ContentStorageAttachmentUploader>(c =>
-        new ContentStorageAttachmentUploader(Configuration.GetValue<string>("Uris:ContentStorage")));
+//      services.AddTransient<IAttachmentUploader, ContentStorageAttachmentUploader>(c =>
+//        new ContentStorageAttachmentUploader(Configuration.GetValue<string>("Uris:ContentStorage")));
     }
   }
 }
