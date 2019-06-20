@@ -21,7 +21,7 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
         {
             await _safeguard.EnsureEmailAsync(email);
             // TODO _safeguard.EnsureName(lastName, firstName); etc.
-            
+
             var pwdHelper = SecurityHelper.Create();
             var user = new User(email, firstName, lastName, "",
                 pwdHelper.CreateSaltedPassword(pwdHash), pwdHelper.Salt);

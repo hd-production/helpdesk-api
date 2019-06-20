@@ -39,7 +39,7 @@ namespace HdProduction.HelpDesk.Api.Controllers
       return _mapper.Map<TicketResponse>(await _ticketService.FindAsync(id));
     }
 
-    [HttpPost("")]
+    [HttpPost(""), AllowAnonymous]
     public async Task<TicketResponse> Create(TicketRequest request)
     {
       var id = await _ticketService.CreateAsync(request.Issue, request.Details, request.IssuerEmail);
