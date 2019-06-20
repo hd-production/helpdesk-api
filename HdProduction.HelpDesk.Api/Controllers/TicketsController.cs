@@ -8,13 +8,15 @@ using HdProduction.HelpDesk.Api.Models.Comments;
 using HdProduction.HelpDesk.Api.Models.Tickets;
 using HdProduction.HelpDesk.Domain.Contract;
 using HdProduction.HelpDesk.Domain.Exceptions;
+using HdProduction.HelpDesk.Domain.Metadata;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HdProduction.HelpDesk.Api.Controllers
 {
   [ApiController, ApiVersion("0")]
-  [Route("tickets"), Authorize]
+  [Route("tickets")]
+  [Authorize(Roles = Permissions.SupportAgentRole)]
   public class TicketsController : ControllerBase
   {
     private readonly IMapper _mapper;

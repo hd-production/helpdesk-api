@@ -20,7 +20,7 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
             _emailService = emailService;
         }
 
-        public async Task<long> CreateAsync(string firstName, string lastName, string email)
+        public async Task<long> CreateAsync(string firstName, string lastName, string email, string role)
         {
             await _safeguard.EnsureEmailAsync(email);
             // TODO _safeguard.EnsureName(lastName, firstName); etc.
@@ -28,7 +28,7 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
             var password = GeneratePassword();
             var pwdHash = SecurityHelper.CreateMd5Hash(password);
             var pwdHelper = SecurityHelper.Create();
-            var user = new User(email, firstName, lastName, "",
+            var user = new User(email, firstName, lastName, role ?? string.Empty,
                 pwdHelper.CreateSaltedPassword(pwdHash), pwdHelper.Salt);
             _userRepository.Add(user);
 

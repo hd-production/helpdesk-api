@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using HdProduction.HelpDesk.Domain.Contract;
 using HdProduction.HelpDesk.Domain.Entities;
@@ -31,7 +32,8 @@ namespace HdProduction.HelpDesk.Infrastructure.Repositories
       var entities = Context.Tickets
         .Include(e => e.Category)
         .Include(e => e.Priority)
-        .Include(e => e.Status);
+        .Include(e => e.Status)
+        .OrderBy(e => e.Id);
 
       return trackEntities
         ? await entities.ToListAsync()

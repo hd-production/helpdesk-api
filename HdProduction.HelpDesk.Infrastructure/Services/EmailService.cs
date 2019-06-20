@@ -25,7 +25,7 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
                 Subject = "Registration in HD Blocks system", 
                 Body = $@"
 <h2>Registration in HD Blocks system</h2>
-<h3>Your temporary password is <b>{tempPassword}</b></h3>
+<p>Your temporary password is <b>{tempPassword}</b></p>
 ", 
                 IsBodyHtml = true
             };

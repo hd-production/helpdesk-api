@@ -27,7 +27,8 @@ namespace HdProduction.HelpDesk.Api.Auth
         Subject = new ClaimsIdentity(new[]
         {
           new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-          new Claim(JwtRegisteredClaimNames.Email, user.Email)
+          new Claim(JwtRegisteredClaimNames.Email, user.Email),
+          new Claim(JwtDefaults.ClaimsRoleType, user.PermissionsRaw), 
         }),
         Expires = DateTime.UtcNow.AddMinutes(30),
         Issuer = JwtDefaults.Issuer,

@@ -5,7 +5,7 @@ namespace HdProduction.HelpDesk.Domain.Contract
 {
     public interface IUserService
     {
-        Task<long> CreateAsync(string firstName, string lastName, string email);
+        Task<long> CreateAsync(string firstName, string lastName, string email, string role);
 
         Task<User> FindAsync(long id);
     }

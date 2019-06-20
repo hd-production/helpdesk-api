@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 using AutoMapper;
-using HdProduction.App.Common.Auth;
 using HdProduction.HelpDesk.Api.Extensions;
 using HdProduction.HelpDesk.Api.Models.Users;
 using HdProduction.HelpDesk.Domain.Contract;
 using HdProduction.HelpDesk.Domain.Entities;
+using HdProduction.HelpDesk.Domain.Metadata;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
@@ -23,14 +23,14 @@ namespace HdProduction.HelpDesk.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("")]
+        [HttpPost(""), Authorize(Roles = Permissions.AdminRole)]
         public async Task<UserResponseModel> Create(UserRequestModel requestModel)
         {
             var userId = await _userService.CreateAsync(
                 requestModel.FirstName,
                 requestModel.LastName,
-                requestModel.Email
-            );
+                requestModel.Email, 
+                requestModel.Role);
             return await Find(userId);
         }
 
