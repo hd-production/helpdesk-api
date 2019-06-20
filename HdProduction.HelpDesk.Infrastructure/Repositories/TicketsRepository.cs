@@ -30,9 +30,12 @@ namespace HdProduction.HelpDesk.Infrastructure.Repositories
     public async Task<List<Ticket>> GetAllAsync(bool trackEntities = true)
     {
       var entities = Context.Tickets
+        .Include(e => e.Attachments)
+        .Include(e => e.Comments)
+        .Include(e => e.Actions)
+        .Include(e => e.Status)
         .Include(e => e.Category)
         .Include(e => e.Priority)
-        .Include(e => e.Status)
         .OrderBy(e => e.Id);
 
       return trackEntities
