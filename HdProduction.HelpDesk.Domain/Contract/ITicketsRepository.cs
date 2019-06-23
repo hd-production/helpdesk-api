@@ -7,6 +7,6 @@ namespace HdProduction.HelpDesk.Domain.Contract
   public interface ITicketsRepository : IRepository<Ticket, long>
   {
     Task<Ticket> FindAsync(long id);
-    Task<List<Ticket>> GetAllAsync(bool withTracking = true);
+    Task<List<Ticket>> GetAllAsync(long projectId, bool withTracking = true);
   }
 }

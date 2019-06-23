@@ -18,6 +18,7 @@ namespace HdProduction.HelpDesk.Infrastructure
     public DbSet<Comment> Comments { get; set; }
     public DbSet<TicketAttachment> Attachments { get; set; }
     public DbSet<TicketAction> Actions { get; set; }
+    public DbSet<Project> Projects { get; set; }
     public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,6 +31,7 @@ namespace HdProduction.HelpDesk.Infrastructure
       modelBuilder.ApplyConfiguration(new TicketStatusConfiguration());
       modelBuilder.ApplyConfiguration(new TicketPriorityConfiguration());
       modelBuilder.ApplyConfiguration(new TicketCategoryConfiguration());
+      modelBuilder.ApplyConfiguration(new ProjectConfiguration());
 
       base.OnModelCreating(modelBuilder);
     }

@@ -27,9 +27,10 @@ namespace HdProduction.HelpDesk.Infrastructure.Repositories
       return entity;
     }
 
-    public async Task<List<Ticket>> GetAllAsync(bool trackEntities = true)
+    public async Task<List<Ticket>> GetAllAsync(long projectId, bool trackEntities = true)
     {
       var entities = Context.Tickets
+        .Where  (e => e.ProjectId == projectId)
         .Include(e => e.Attachments)
         .Include(e => e.Comments)
         .Include(e => e.Actions)

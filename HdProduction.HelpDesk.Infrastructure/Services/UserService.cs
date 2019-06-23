@@ -20,7 +20,7 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
             _emailService = emailService;
         }
 
-        public async Task<long> CreateAsync(string firstName, string lastName, string email, string role)
+        public async Task<long> CreateAsync(string firstName, string lastName, string email, string role, long projectId)
         {
             await _safeguard.EnsureEmailAsync(email);
             // TODO _safeguard.EnsureName(lastName, firstName); etc.

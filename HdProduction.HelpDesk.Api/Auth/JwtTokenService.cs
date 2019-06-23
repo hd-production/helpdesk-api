@@ -29,6 +29,7 @@ namespace HdProduction.HelpDesk.Api.Auth
           new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
           new Claim(JwtRegisteredClaimNames.Email, user.Email),
           new Claim(JwtDefaults.ClaimsRoleType, user.PermissionsRaw), 
+          new Claim(JwtDefaults.ProjectId, user.ProjectId.ToString()), 
         }),
         Expires = DateTime.UtcNow.AddMinutes(30),
         Issuer = JwtDefaults.Issuer,

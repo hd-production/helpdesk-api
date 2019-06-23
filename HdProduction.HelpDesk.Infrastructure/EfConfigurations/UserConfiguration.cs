@@ -34,6 +34,8 @@ namespace HdProduction.HelpDesk.Infrastructure.EfConfigurations
 
       builder.Property(u => u.PermissionsRaw);
 
+      builder.Property(u => u.ProjectId).IsRequired();
+
       base.ConfigureNext(builder);
     }
   }

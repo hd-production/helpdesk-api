@@ -21,6 +21,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace HdProduction.HelpDesk.Api.Configuration
 {
@@ -43,6 +44,7 @@ namespace HdProduction.HelpDesk.Api.Configuration
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 //            services.AddApiVersioning();
+            services.AddSwaggerGen(c => c.SwaggerDoc("v0", new Info {Title = "HdProduction.HelpDesk.Api", Version = "v0"}));
 
             services.AddScoped<ITicketsRepository, TicketsRepository>();
             services.AddScoped<TicketAttributeSafeguard<TicketStatus>>();
@@ -61,6 +63,9 @@ namespace HdProduction.HelpDesk.Api.Configuration
             services.AddScoped<ITicketActionRepository, TicketActionRepository>();
             services.AddScoped<ICommentRepository, CommentsRepository>();
             services.AddScoped<IAttachmentRepository, AttachmentRepository>();
+            
+            services.AddScoped<IProjectRepository, ProjectRepository>();
+            services.AddScoped<IProjectService, ProjectService>();
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISessionService, SessionsService>();
@@ -90,7 +95,9 @@ namespace HdProduction.HelpDesk.Api.Configuration
 
             Task.Run(() => ConfigureDbAsync(app));
             app.UseMiddleware<ErrorHandlingMiddleware>();
-            app.UseCors(Configuration);
+            app.UseCors(Configuration.GetSection("Cors"));
+            app.UseSwagger();
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("v0/swagger.json", "HdProduction.HelpDesk.Api"); });
             app.UseAuthentication();
             app.UseMvc();
 

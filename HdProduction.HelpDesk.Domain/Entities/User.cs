@@ -22,6 +22,7 @@ namespace HdProduction.HelpDesk.Domain.Entities
     public string PwdHash { get; }
     public string PwdSalt { get; }
     public string RefreshToken { get; private set; }
+    public long ProjectId { get; private set; }
 
     public void SetRefreshToken(string refreshToken)
     {

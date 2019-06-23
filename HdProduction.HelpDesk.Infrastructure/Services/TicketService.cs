@@ -43,9 +43,9 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
       return _ticketsRepository.FindAsync(id);
     }
 
-    public Task<List<Ticket>> GetAllAsync()
+    public Task<List<Ticket>> GetAllAsync(long projectId)
     {
-      return _ticketsRepository.GetAllAsync();
+      return _ticketsRepository.GetAllAsync(projectId);
     }
 
     public async Task<long> CreateAsync(string issue, string details, string issuerEmail,

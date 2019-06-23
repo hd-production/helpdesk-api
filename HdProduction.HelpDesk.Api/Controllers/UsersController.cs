@@ -30,7 +30,8 @@ namespace HdProduction.HelpDesk.Api.Controllers
                 requestModel.FirstName,
                 requestModel.LastName,
                 requestModel.Email, 
-                requestModel.Role);
+                requestModel.Role,
+                User.GetProjectId());
             return await Find(userId);
         }
 

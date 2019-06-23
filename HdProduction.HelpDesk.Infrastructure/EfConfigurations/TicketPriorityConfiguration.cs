@@ -11,6 +11,7 @@ namespace HdProduction.HelpDesk.Infrastructure.EfConfigurations
                 .IsRequired()
                 .HasMaxLength(TicketPriority.MaxNameLength);
             builder.Property(s => s.Default);
+            builder.Property(s => s.ProjectId).IsRequired();
 
             base.ConfigureNext(builder);
         }

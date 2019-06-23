@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using HdProduction.HelpDesk.Domain.Contract;
 using HdProduction.HelpDesk.Domain.Entities;
@@ -13,9 +14,9 @@ namespace HdProduction.HelpDesk.Infrastructure.Repositories
         {
         }
 
-        public Task<List<T>> GetAllAsync()
+        public Task<List<T>> GetAllAsync(long projectId)
         {
-            return Context.Set<T>().ToListAsync();
+            return Context.Set<T>().Where(ta => ta.ProjectId == projectId).ToListAsync();
         }
 
         public Task<T> FindByNameAsync(string name)

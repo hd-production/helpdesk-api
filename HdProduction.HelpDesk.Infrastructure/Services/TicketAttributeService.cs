@@ -40,9 +40,9 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
             await _repository.SaveAsync();
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public async Task<List<T>> GetAllAsync(long projectId)
         {
-            return await _repository.GetAllAsync();
+            return await _repository.GetAllAsync(projectId);
         }
 
         public async Task<T> FindById(int id)

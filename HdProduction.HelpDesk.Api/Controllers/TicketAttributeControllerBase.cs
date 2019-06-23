@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using HdProduction.HelpDesk.Api.Extensions;
 using HdProduction.HelpDesk.Api.Models.TicketAttributes;
 using HdProduction.HelpDesk.Domain.Contract;
 using HdProduction.HelpDesk.Domain.Entities;
@@ -26,7 +27,7 @@ namespace HdProduction.HelpDesk.Api.Controllers
         [HttpGet]
         public async Task<IEnumerable<TicketAttributeResponse>> Get()
         {
-            var entities = await _service.GetAllAsync();
+            var entities = await _service.GetAllAsync(User.GetProjectId());
             return entities.Select(_mapper.Map<TicketAttributeResponse>);
         }
 

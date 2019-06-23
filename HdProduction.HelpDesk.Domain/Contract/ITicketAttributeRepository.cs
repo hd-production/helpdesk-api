@@ -6,7 +6,7 @@ namespace HdProduction.HelpDesk.Domain.Contract
 {
     public interface ITicketAttributeRepository<T> : IRepository<T, int> where T : TicketAttribute
     {
-        Task<List<T>> GetAllAsync();
+        Task<List<T>> GetAllAsync(long projectId);
         Task<T> FindByNameAsync(string name);
         Task<TicketAttribute> FindDefaultAsync();
     }

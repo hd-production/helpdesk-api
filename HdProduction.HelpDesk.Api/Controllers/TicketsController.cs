@@ -31,7 +31,7 @@ namespace HdProduction.HelpDesk.Api.Controllers
     [HttpGet("")]
     public async Task<IEnumerable<TicketResponse>> Get()
     {
-      var tickets = await _ticketService.GetAllAsync();
+      var tickets = await _ticketService.GetAllAsync(User.GetProjectId());
       return tickets.Select(_mapper.Map<TicketResponse>);
     }
 
