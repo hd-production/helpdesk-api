@@ -21,11 +21,11 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
             _safeguard = safeguard;
         }
 
-        public async Task<int> CreateAsync(string name)
+        public async Task<int> CreateAsync(string name, long projectId)
         {
             await _safeguard.EnsureNameAsync(name);
 
-            var entity = new T {Name = name};
+            var entity = new T {Name = name, ProjectId = projectId};
             _repository.Add(entity);
             await _repository.SaveAsync();
             return entity.Id;

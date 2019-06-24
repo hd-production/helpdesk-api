@@ -41,7 +41,7 @@ namespace HdProduction.HelpDesk.Api.Controllers
         [HttpPost]
         public async Task<TicketAttributeResponse> Create(TicketAttributeRequest ticketAttributeData)
         {
-            var id = await _service.CreateAsync(ticketAttributeData.Name);
+            var id = await _service.CreateAsync(ticketAttributeData.Name, User.GetProjectId());
             return await Get(id);
         }
 
