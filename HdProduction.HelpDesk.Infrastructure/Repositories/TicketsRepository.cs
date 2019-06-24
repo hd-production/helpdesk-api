@@ -37,7 +37,7 @@ namespace HdProduction.HelpDesk.Infrastructure.Repositories
         .Include(e => e.Status)
         .Include(e => e.Category)
         .Include(e => e.Priority)
-        .OrderBy(e => e.Id);
+        .OrderByDescending(e => e.Id);
 
       return trackEntities
         ? await entities.ToListAsync()
