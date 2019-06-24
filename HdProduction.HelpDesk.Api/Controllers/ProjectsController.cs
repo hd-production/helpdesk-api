@@ -19,7 +19,7 @@ namespace HdProduction.HelpDesk.Api.Controllers
         }
 
         [HttpPost]
-        public async Task CreateProject(CreateProjectRequest request)
+        public async Task CreateProject([FromBody] CreateProjectRequest request)
         {
             await _projectService.CreateAsync(request.Id, request.Name);
             await _userService.CreateAsync(request.DefaultAdminSettings.FirstName,

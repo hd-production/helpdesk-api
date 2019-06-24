@@ -6,7 +6,7 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
 {
     public interface IEmailService
     {
-        Task SendMailInvitationAsync(string email, string tempPassword);
+        Task SendMailInvitationAsync(string email, string tempPassword, string role);
     }
 
     public class EmailService : IEmailService
@@ -16,7 +16,7 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
         private const string HelpDeskName = "HD Blocks";
         private const string HelpDeskPwd = "123456Qwerty";
         
-        public Task SendMailInvitationAsync(string email, string tempPassword)
+        public Task SendMailInvitationAsync(string email, string tempPassword, string role)
         {
             MailAddress from = new MailAddress(HelpDeskEmail, HelpDeskName);
             MailAddress to = new MailAddress(email);
@@ -25,6 +25,7 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
                 Subject = "Registration in HD Blocks system", 
                 Body = $@"
 <h2>Registration in HD Blocks system</h2>
+<p>You has bee registered as {role} in Help Desk</p>
 <p>Your temporary password is <b>{tempPassword}</b></p>
 ", 
                 IsBodyHtml = true

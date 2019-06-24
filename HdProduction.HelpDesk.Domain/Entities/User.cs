@@ -5,7 +5,7 @@ namespace HdProduction.HelpDesk.Domain.Entities
 {
   public class User : EntityBase<long>
   {
-    public User(string email, string firstName, string lastName, string permissionsRaw, string pwdHash, string pwdSalt)
+    public User(string email, string firstName, string lastName, string permissionsRaw, string pwdHash, string pwdSalt, long projectId)
     {
       Email = email;
       FirstName = firstName;
@@ -13,6 +13,7 @@ namespace HdProduction.HelpDesk.Domain.Entities
       PermissionsRaw = permissionsRaw;
       PwdHash = pwdHash;
       PwdSalt = pwdSalt;
+      ProjectId = projectId;
     }
 
     public string Email { get; }
@@ -21,8 +22,8 @@ namespace HdProduction.HelpDesk.Domain.Entities
     public string PermissionsRaw { get; }
     public string PwdHash { get; }
     public string PwdSalt { get; }
+    public long ProjectId { get; }
     public string RefreshToken { get; private set; }
-    public long ProjectId { get; private set; }
 
     public void SetRefreshToken(string refreshToken)
     {

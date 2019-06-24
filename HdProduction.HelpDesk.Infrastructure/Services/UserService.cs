@@ -29,10 +29,10 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
             var pwdHash = SecurityHelper.CreateMd5Hash(password);
             var pwdHelper = SecurityHelper.Create();
             var user = new User(email, firstName, lastName, role ?? string.Empty,
-                pwdHelper.CreateSaltedPassword(pwdHash), pwdHelper.Salt);
+                pwdHelper.CreateSaltedPassword(pwdHash), pwdHelper.Salt, projectId);
             _userRepository.Add(user);
 
-            await _emailService.SendMailInvitationAsync(email, password);
+            await _emailService.SendMailInvitationAsync(email, password, role);
             await _userRepository.SaveAsync();
             return user.Id;
         }
