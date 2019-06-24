@@ -6,22 +6,27 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace HdProduction.Infrastructure.Sqlite.Migrations
+namespace HdProduction.Infrastructure.MySql.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20190410142959_Initial")]
+    [Migration("20190624120306_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034");
+                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("HdProduction.HelpDesk.Domain.Entities.Comment", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<long?>("ReplyToCommentId");
 
                     b.Property<string>("Text")
                         .HasMaxLength(512);
@@ -32,11 +37,28 @@ namespace HdProduction.Infrastructure.Sqlite.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ReplyToCommentId");
+
                     b.HasIndex("TicketId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("HdProduction.HelpDesk.Domain.Entities.Project", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("DashboardId");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("HdProduction.HelpDesk.Domain.Entities.Ticket", b =>
@@ -46,6 +68,8 @@ namespace HdProduction.Infrastructure.Sqlite.Migrations
 
                     b.Property<long?>("AssigneeId");
 
+                    b.Property<int?>("CategoryId");
+
                     b.Property<string>("Details")
                         .IsRequired();
 
@@ -53,7 +77,23 @@ namespace HdProduction.Infrastructure.Sqlite.Migrations
                         .IsRequired()
                         .HasMaxLength(256);
 
+                    b.Property<string>("IssuerEmail");
+
+                    b.Property<int?>("PriorityId");
+
+                    b.Property<long?>("ProjectId");
+
+                    b.Property<int?>("StatusId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("AssigneeId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("PriorityId");
+
+                    b.HasIndex("StatusId");
 
                     b.ToTable("Tickets");
                 });
@@ -62,6 +102,8 @@ namespace HdProduction.Infrastructure.Sqlite.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("AttachmentKey");
 
                     b.Property<long?>("CommentId");
 
@@ -92,14 +134,73 @@ namespace HdProduction.Infrastructure.Sqlite.Migrations
 
             modelBuilder.Entity("HdProduction.HelpDesk.Domain.Entities.TicketAttachment", b =>
                 {
+                    b.Property<Guid>("Key")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<long>("TicketId");
 
-                    b.Property<string>("AttachmentKey")
+                    b.Property<string>("Url")
                         .HasMaxLength(256);
 
-                    b.HasKey("TicketId", "AttachmentKey");
+                    b.HasKey("Key");
+
+                    b.HasIndex("TicketId");
 
                     b.ToTable("Attachments");
+                });
+
+            modelBuilder.Entity("HdProduction.HelpDesk.Domain.Entities.TicketCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Default");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(32);
+
+                    b.Property<long>("ProjectId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TicketCategories");
+                });
+
+            modelBuilder.Entity("HdProduction.HelpDesk.Domain.Entities.TicketPriority", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Default");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(32);
+
+                    b.Property<long>("ProjectId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TicketPriorities");
+                });
+
+            modelBuilder.Entity("HdProduction.HelpDesk.Domain.Entities.TicketStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Default");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(32);
+
+                    b.Property<long>("ProjectId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TicketStatuses");
                 });
 
             modelBuilder.Entity("HdProduction.HelpDesk.Domain.Entities.User", b =>
@@ -121,6 +222,8 @@ namespace HdProduction.Infrastructure.Sqlite.Migrations
 
                     b.Property<string>("PermissionsRaw");
 
+                    b.Property<long>("ProjectId");
+
                     b.Property<string>("PwdHash")
                         .IsRequired();
 
@@ -139,17 +242,39 @@ namespace HdProduction.Infrastructure.Sqlite.Migrations
 
             modelBuilder.Entity("HdProduction.HelpDesk.Domain.Entities.Comment", b =>
                 {
+                    b.HasOne("HdProduction.HelpDesk.Domain.Entities.Comment", "Parent")
+                        .WithMany("Replies")
+                        .HasForeignKey("ReplyToCommentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("HdProduction.HelpDesk.Domain.Entities.Ticket", "Ticket")
                         .WithMany("Comments")
                         .HasForeignKey("TicketId")
-                        .HasConstraintName("FK_Tickets")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("HdProduction.HelpDesk.Domain.Entities.User", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
-                        .HasConstraintName("FK_Comments")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HdProduction.HelpDesk.Domain.Entities.Ticket", b =>
+                {
+                    b.HasOne("HdProduction.HelpDesk.Domain.Entities.User", "Assignee")
+                        .WithMany("Tickets")
+                        .HasForeignKey("AssigneeId");
+
+                    b.HasOne("HdProduction.HelpDesk.Domain.Entities.TicketCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("HdProduction.HelpDesk.Domain.Entities.TicketPriority", "Priority")
+                        .WithMany()
+                        .HasForeignKey("PriorityId");
+
+                    b.HasOne("HdProduction.HelpDesk.Domain.Entities.TicketStatus", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId");
                 });
 
             modelBuilder.Entity("HdProduction.HelpDesk.Domain.Entities.TicketAction", b =>

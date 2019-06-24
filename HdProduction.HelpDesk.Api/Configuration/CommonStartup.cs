@@ -120,6 +120,7 @@ namespace HdProduction.HelpDesk.Api.Configuration
                     {
                         await context.Database.MigrateAsync();
                     }
+                    await context.Database.MigrateAsync();
                 }
                 catch(Exception e)
                 {

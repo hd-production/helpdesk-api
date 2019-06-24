@@ -57,10 +57,7 @@ namespace HdProduction.HelpDesk.Api.Controllers
     }
 
     [HttpDelete("{id}")]
-    public Task Delete(long id)
-    {
-      return _ticketService.DeleteAsync(id);
-    }
+    public Task Delete(long id) => _ticketService.DeleteAsync(id);
 
     [HttpPost("{id}/comment")]
     public async Task<TicketResponse> AddComment(long id, CommentRequest request)
@@ -89,9 +86,6 @@ namespace HdProduction.HelpDesk.Api.Controllers
     }
 
     [HttpDelete("{id}/attachment/{key:guid}")]
-    public Task Delete(long id, Guid key)
-    {
-      return _ticketService.RemoveAttachmentAsync(key, User.GetId());
-    }
+    public Task Delete(long id, Guid key) => _ticketService.RemoveAttachmentAsync(key, User.GetId());
   }
 }
