@@ -4,7 +4,7 @@ namespace HdProduction.HelpDesk.Domain.Entities
 {
   public class Ticket : EntityBase<long>
   {
-    public Ticket(string issue, string details, string issuerEmail, long? projectId, long? assigneeId = null, int? priorityId = null, int? statusId = null, int? categoryId = null)
+    public Ticket(string issue, string details, string issuerEmail, long projectId, long? assigneeId = null, int? priorityId = null, int? statusId = null, int? categoryId = null)
     {
       Issue = issue;
       Details = details;
@@ -23,7 +23,7 @@ namespace HdProduction.HelpDesk.Domain.Entities
     public int? PriorityId { get; private set; }
     public int? StatusId { get; private set; }
     public int? CategoryId { get; private set; }
-    public long? ProjectId { get; private set; }
+    public long ProjectId { get; private set; }
 
     public User Assignee { get; set; } // ef
     public TicketPriority Priority { get; set; } // ef

@@ -9,5 +9,6 @@ namespace HdProduction.HelpDesk.Api.Models.Tickets
     public int? PriorityId { get; set; }
     public int? StatusId { get; set; }
     public int? CategoryId { get; set; }
+    public long ProjectId { get; set; }
   }
 }

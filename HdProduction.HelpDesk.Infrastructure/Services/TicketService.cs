@@ -48,10 +48,10 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
       return _ticketsRepository.GetAllAsync(projectId);
     }
 
-    public async Task<long> CreateAsync(string issue, string details, string issuerEmail,
+    public async Task<long> CreateAsync(string issue, string details, string issuerEmail, long projectId,
       long? assigneeId = null, int? priorityId = null, int? statusId = null, int? categoryId = null)
     {
-      var ticket = new Ticket(issue, details, issuerEmail, assigneeId,
+      var ticket = new Ticket(issue, details, issuerEmail, projectId, assigneeId,
         priorityId ?? (await _priorityRepository.FindDefaultAsync())?.Id,
         statusId ?? (await _statusRepository.FindDefaultAsync())?.Id,
         categoryId ?? (await _categoryRepository.FindDefaultAsync())?.Id

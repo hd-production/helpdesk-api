@@ -10,7 +10,7 @@ namespace HdProduction.HelpDesk.Domain.Contract
   {
     Task<Ticket> FindAsync(long id);
     Task<List<Ticket>> GetAllAsync(long projectId);
-    Task<long> CreateAsync(string issue, string details, string issuerEmail,
+    Task<long> CreateAsync(string issue, string details, string issuerEmail, long projectId,
       long? assigneeId = null, int? priorityId = null, int? statusId = null, int? categoryId = null);
     Task UpdateAsync(long id,string issue, string details, string issuerEmail,
       long? assigneeId, int? priorityId, int? statusId, int? categoryId);

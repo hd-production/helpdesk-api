@@ -44,7 +44,7 @@ namespace HdProduction.HelpDesk.Api.Controllers
     [HttpPost(""), AllowAnonymous]
     public async Task<TicketResponse> Create(TicketRequest request)
     {
-      var id = await _ticketService.CreateAsync(request.Issue, request.Details, request.IssuerEmail);
+      var id = await _ticketService.CreateAsync(request.Issue, request.Details, request.IssuerEmail, request.ProjectId);
       return await Get(id);
     }
 
