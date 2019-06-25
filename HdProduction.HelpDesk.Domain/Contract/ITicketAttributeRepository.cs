@@ -8,6 +8,6 @@ namespace HdProduction.HelpDesk.Domain.Contract
     {
         Task<List<T>> GetAllAsync(long projectId);
         Task<T> FindByNameAsync(string name, long projectId);
-        Task<TicketAttribute> FindDefaultAsync();
+        Task<TicketAttribute> FindDefaultAsync(long projectId);
     }
 }
