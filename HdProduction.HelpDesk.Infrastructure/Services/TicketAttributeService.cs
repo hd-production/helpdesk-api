@@ -23,7 +23,7 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
 
         public async Task<int> CreateAsync(string name, long projectId)
         {
-            await _safeguard.EnsureNameAsync(name);
+            await _safeguard.EnsureNameAsync(name, projectId);
 
             var entity = new T {Name = name, ProjectId = projectId};
             _repository.Add(entity);
@@ -33,9 +33,9 @@ namespace HdProduction.HelpDesk.Infrastructure.Services
 
         public async Task UpdateAsync(int id, string name)
         {
-            await _safeguard.EnsureNameAsync(name);
-
             var entity = await FindById(id);
+            
+            await _safeguard.EnsureNameAsync(name, entity.ProjectId);
             entity.Name = name;
             await _repository.SaveAsync();
         }

@@ -14,7 +14,7 @@ namespace HdProduction.HelpDesk.Domain.Safeguards
             _repository = repository;
         }
 
-        public async Task EnsureNameAsync(string name)
+        public async Task EnsureNameAsync(string name, long projectId)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -24,7 +24,7 @@ namespace HdProduction.HelpDesk.Domain.Safeguards
             {
                 throw ExceptionsHelper.LongLength(nameof(name));
             }
-            if (await _repository.FindByNameAsync(name) != null)
+            if (await _repository.FindByNameAsync(name, projectId) != null)
             {
                 throw ExceptionsHelper.EntityAlreadyExists(typeof(T).Name, nameof(name));
             }

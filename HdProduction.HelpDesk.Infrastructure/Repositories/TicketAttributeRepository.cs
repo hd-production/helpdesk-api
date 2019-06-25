@@ -19,9 +19,10 @@ namespace HdProduction.HelpDesk.Infrastructure.Repositories
             return Context.Set<T>().Where(ta => ta.ProjectId == projectId).ToListAsync();
         }
 
-        public Task<T> FindByNameAsync(string name)
+        public Task<T> FindByNameAsync(string name, long projectId)
         {
-            return Context.Set<T>().FirstOrDefaultAsync(s => s.Name == name);
+            return Context.Set<T>()
+                .FirstOrDefaultAsync(s => s.Name == name && s.ProjectId == projectId);
         }
 
         public async Task<TicketAttribute> FindDefaultAsync()
